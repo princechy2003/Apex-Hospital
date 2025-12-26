@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Hospital Itahari | Advanced Medical Treatment & Compassionate Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-blue: #0F4C75;
+            --dark-blue: #1B262C;
+            --accent-blue: #3282B8;
+            --healing-green: #10B981;
+            --accent-coral: #F97316;
+            --emergency-red: #EF4444;
+            --light-bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --gray-light: #E2E8F0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: var(--accent-blue);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-emergency {
+            background-color: var(--emergency-red);
+        }
+
+        .btn-emergency:hover {
+            background-color: #DC2626;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-blue);
+            color: var(--white);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: var(--white);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--accent-coral);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover:after,
+        nav ul li a.active:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Emergency Alert Bar */
+        .emergency-alert {
+            background-color: var(--emergency-red);
+            color: var(--white);
+            text-align: center;
+            padding: 10px 0;
+            font-weight: 600;
+        }
+
+        .emergency-alert i {
+            margin-right: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 76, 117, 0.9), rgba(15, 76, 117, 0.8)), url('https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            color: var(--white);
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Quick Info Bar */
+        .quick-info {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            margin-top: -50px;
+            border-radius: var(--border-radius);
+            position: relative;
+            z-index: 100;
+        }
+
+        .quick-info-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0;
+        }
+
+        .info-item {
+            padding: 30px;
+            text-align: center;
+            border-right: 1px solid var(--gray-light);
+        }
+
+        .info-item:last-child {
+            border-right: none;
+        }
+
+        .info-item i {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        .info-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Specialties Section */
+        .specialties {
+            background-color: var(--white);
+        }
+
+        .specialty-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: var(--light-bg);
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--accent-blue);
+            color: var(--white);
+        }
+
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .specialty-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .specialty-icon {
+            font-size: 3rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
+        /* Doctors Section */
+        .doctors-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 30px;
+            padding: 20px 0;
+            scrollbar-width: thin;
+        }
+
+        .doctor-card {
+            flex: 0 0 auto;
+            width: 300px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .doctor-img {
+            height: 250px;
+            background-color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary-blue);
+        }
+
+        .doctor-info {
+            padding: 25px;
+        }
+
+        .doctor-specialty {
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .doctor-qualifications {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-img {
+            height: 200px;
+            background-color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-blue);
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            background-color: var(--accent-blue);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(50, 130, 184, 0.2);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0;
+            height: 400px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            background-color: var(--gray-light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-coral);
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-links h4:after,
+        .footer-contact h4:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-blue);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: var(--transition);
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 0 0 30px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .quick-info-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-item {
+                border-right: none;
+                border-bottom: 1px solid var(--gray-light);
+            }
+            
+            .info-item:last-child {
+                border-bottom: none;
+            }
+            
+            .specialty-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Emergency Alert -->
+    <div class="emergency-alert">
+        <i class="fas fa-phone-alt"></i> Emergency Hotline: 01-XXXXXX | 24/7 Emergency Services Available
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-hospital logo-icon"></i>
+                <div class="logo-text">Apex<span>Hospital</span></div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#specialties">Specialties</a></li>
+                    <li><a href="#doctors">Doctors</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="btn btn-emergency">Emergency</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Advanced Medical Treatment & Compassionate Care</h1>
+            <p>Apex Hospital Itahari is a dedicated healthcare provider committed to offering advanced medical treatment and compassionate care to the community. Our team consists of highly qualified specialists and surgeons across various disciplines.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn">Book Appointment</a>
+                <a href="#services" class="btn btn-secondary">Our Services</a>
+                <a href="tel:01-XXXXXX" class="btn btn-emergency">Emergency Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Info Bar -->
+    <section class="quick-info">
+        <div class="container">
+            <div class="quick-info-items">
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <h4>24/7 Emergency</h4>
+                    <p>Round-the-clock emergency services</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4>OPD Hours</h4>
+                    <p>Sun-Fri: 9AM - 5PM | Sat: 9AM - 1PM</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone Number</h4>
+                    <p>01-XXXXXX | 98XXXXXXXX</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Location</h4>
+                    <p>Itahari, Sunsari, Nepal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Apex Hospital</h2>
+                <p>Our commitment to healthcare excellence</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Trusted Healthcare for Itahari & Region</h3>
+                    <p>Apex Hospital Itahari is a dedicated healthcare provider committed to offering advanced medical treatment and compassionate care to the community. Our team consists of highly qualified specialists and surgeons across various disciplines, supported by modern technology and patient-centric services.</p>
+                    <p>We strive to be a trusted name in healthcare for Itahari and the surrounding region by combining clinical excellence with ethical practice. Our goal is to ensure accessibility, affordability, and the highest standard of medical treatment for all our patients.</p>
+                    <a href="#contact" class="btn">Contact Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Apex Hospital Facility">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section class="specialties" id="specialties">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Medical Specialties</h2>
+                <p>Comprehensive healthcare across all major disciplines</p>
+            </div>
+            
+            <div class="specialty-filter" id="specialtyFilter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="cardiology">Cardiology</button>
+                <button class="filter-btn" data-filter="orthopedics">Orthopedics</button>
+                <button class="filter-btn" data-filter="surgery">Surgery</button>
+                <button class="filter-btn" data-filter="diagnostics">Diagnostics</button>
+            </div>
+            
+            <div class="specialty-grid" id="specialtyGrid">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Medical Team</h2>
+                <p>Highly qualified specialists and surgeons</p>
+            </div>
+            
+            <div class="doctors-slider" id="doctorsSlider">
+                <!-- Doctor cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services & Facilities</h2>
+                <p>Comprehensive medical services with modern technology</p>
+            </div>
+            
+            <div class="services-grid" id="servicesGrid">
+                <!-- Service cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch for appointments or inquiries</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Apex Hospital Itahari<br>Itahari, Sunsari, Nepal</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Phone Number</h4>
+                            <p>01-XXXXXX<br>98XXXXXXXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Address</h4>
+                            <p>info@apexhospitalitahari.com<br>appointment@apexhospitalitahari.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Working Hours</h4>
+                            <p>Sun-Fri: 9AM - 5PM<br>Sat: 9AM - 1PM<br>Emergency: 24/7</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Book an Appointment</h3>
+                    <form id="appointmentForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Required</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="general">General Consultation</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="surgery">Surgery</option>
+                                <option value="diagnostics">Diagnostics</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Additional Information</label>
+                            <textarea id="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Submit Appointment Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div id="map">
+            <!-- Map will be embedded via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Apex<span>Hospital</span></div>
+                    <p>Apex Hospital Itahari is a dedicated healthcare provider committed to offering advanced medical treatment and compassionate care to the community.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/apexhospitalitahari/photos" target="_blank" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#specialties">Specialties</a></li>
+                        <li><a href="#doctors">Our Doctors</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Itahari, Sunsari, Nepal</p>
+                    <p><i class="fas fa-phone-alt"></i> 01-XXXXXX | 98XXXXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@apexhospitalitahari.com</p>
+                    <p><i class="fas fa-clock"></i> Sun-Fri: 9AM - 5PM | Emergency: 24/7</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Apex Hospital Itahari. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #EF4444;"></i> for better healthcare</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Data for specialties
+        const specialtiesData = [
+            { id: 1, name: "Cardiology", icon: "fas fa-heartbeat", filter: "cardiology", description: "Specialists in heart-related conditions and treatments including ECG, echocardiography, and cardiac interventions." },
+            { id: 2, name: "Orthopedic Surgery", icon: "fas fa-bone", filter: "orthopedics", description: "Experts in bone, joint, and musculoskeletal system care including joint replacement and fracture management." },
+            { id: 3, name: "General & Laparoscopic Surgery", icon: "fas fa-syringe", filter: "surgery", description: "Providing advanced surgical solutions with minimal invasion for faster recovery and less scarring." },
+            { id: 4, name: "Consultant Physicians & Diabetologists", icon: "fas fa-stethoscope", filter: "cardiology", description: "Managing internal medicine and specialized diabetes care with comprehensive treatment plans." },
+            { id: 5, name: "Radiology & Sonology", icon: "fas fa-x-ray", filter: "diagnostics", description: "Experts in diagnostic imaging (X-ray, ultrasound, CT scan) for accurate diagnosis and treatment planning." },
+            { id: 6, name: "Urology", icon: "fas fa-kidneys", filter: "surgery", description: "Specialized care for urinary tract and male reproductive system disorders." },
+            { id: 7, name: "ENT (Ear, Nose, Throat)", icon: "fas fa-ear", filter: "surgery", description: "Comprehensive care for ear, nose, throat, head and neck disorders." },
+            { id: 8, name: "Neurology", icon: "fas fa-brain", filter: "cardiology", description: "Diagnosis and treatment of disorders affecting the brain, spinal cord, and nerves." },
+            { id: 9, name: "Pediatrics", icon: "fas fa-baby", filter: "cardiology", description: "Specialized healthcare for infants, children, and adolescents." },
+            { id: 10, name: "Gynecology & Obstetrics", icon: "fas fa-female", filter: "surgery", description: "Comprehensive care for women's health, pregnancy, and childbirth." },
+            { id: 11, name: "Dermatology", icon: "fas fa-allergies", filter: "cardiology", description: "Diagnosis and treatment of skin, hair, and nail conditions." },
+            { id: 12, name: "Psychiatry", icon: "fas fa-head-side-virus", filter: "cardiology", description: "Mental health care including diagnosis, therapy, and medication management." },
+            { id: 13, name: "Dentistry", icon: "fas fa-tooth", filter: "surgery", description: "Complete oral healthcare including preventive, restorative, and cosmetic dentistry." }
+        ];
+
+        // Data for doctors
+        const doctorsData = [
+            { id: 1, name: "ST. 31", specialty: "Medical Practitioner", qualifications: "MBBS, MD - NMC Registration No. 5287", description: "A qualified medical practitioner with extensive experience in general medicine and patient care." },
+            { id: 2, name: "Dr. Ramesh Shah", specialty: "Cardiologist", qualifications: "MD, DM Cardiology", description: "Expert in interventional cardiology with 15+ years of experience in heart disease management." },
+            { id: 3, name: "Dr. Sunil Kumar", specialty: "Orthopedic Surgeon", qualifications: "MS Orthopedics", description: "Specialist in joint replacement and sports medicine with expertise in minimally invasive procedures." },
+            { id: 4, name: "Dr. Anita Sharma", specialty: "General & Laparoscopic Surgeon", qualifications: "MS General Surgery", description: "Expert in advanced laparoscopic surgeries with focus on gastrointestinal and hernia surgeries." },
+            { id: 5, name: "Dr. Prakash Yadav", specialty: "Radiologist", qualifications: "MD Radiology", description: "Specialized in diagnostic imaging including MRI, CT scan, and ultrasound interpretation." },
+            { id: 6, name: "Dr. Sita Gurung", specialty: "Gynecologist & Obstetrician", qualifications: "MD, DGO", description: "Expert in women's health, high-risk pregnancies, and minimally invasive gynecological surgeries." }
+        ];
+
+        // Data for services
+        const servicesData = [
+            { id: 1, name: "Advanced Diagnostics", icon: "fas fa-microscope", description: "Featuring modern radiology and sonography units with digital X-ray, ultrasound, ECG, and laboratory services for accurate diagnosis.", features: ["Digital X-ray", "Ultrasound", "ECG", "Pathology Lab"] },
+            { id: 2, name: "Specialized Surgical Departments", icon: "fas fa-syringe", description: "Covering orthopedics, general surgery, urology, ENT, and more with advanced operation theaters and laparoscopic equipment.", features: ["Orthopedic Surgery", "Laparoscopic Surgery", "Urology", "ENT Surgery"] },
+            { id: 3, name: "Critical & Emergency Care", icon: "fas fa-ambulance", description: "Ready to handle medical emergencies 24/7 with fully equipped emergency department, ambulance services, and critical care unit.", features: ["24/7 Emergency", "Ambulance", "ICU", "Trauma Care"] },
+            { id: 4, name: "Chronic Disease Management", icon: "fas fa-clipboard-check", description: "Specialized clinics for diabetes, heart disease, hypertension, and other long-term conditions with regular monitoring and counseling.", features: ["Diabetes Clinic", "Cardiac Care", "Hypertension Management", "Regular Follow-ups"] },
+            { id: 5, name: "Consultation OPDs", icon: "fas fa-user-md", description: "Outpatient departments for all major medical specialties with convenient appointment system and timely consultations.", features: ["All Specialties", "Appointment System", "Timely Consultations", "Follow-up Care"] },
+            { id: 6, name: "Maternal & Child Health", icon: "fas fa-baby", description: "Comprehensive care for gynecology, obstetrics, and pediatrics including prenatal care, delivery, and pediatric vaccinations.", features: ["Prenatal Care", "Delivery Services", "Pediatric Care", "Vaccinations"] }
+        ];
+
+        // DOM Elements
+        const header = document.getElementById('header');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const specialtyGrid = document.getElementById('specialtyGrid');
+        const specialtyFilter = document.getElementById('specialtyFilter');
+        const doctorsSlider = document.getElementById('doctorsSlider');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const appointmentForm = document.getElementById('appointmentForm');
+        const backToTop = document.getElementById('backToTop');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render specialties
+            renderSpecialties();
+            
+            // Render doctors
+            renderDoctors();
+            
+            // Render services
+            renderServices();
+            
+            // Initialize map
+            initMap();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Add console easter egg
+            console.log("%c🏥 Apex Hospital Itahari - Where Compassion Meets Excellence 🏥", "color: #0F4C75; font-size: 16px; font-weight: bold;");
+            console.log("%cWelcome to our healthcare portal. We're committed to your well-being!", "color: #10B981; font-size: 14px;");
+        });
+
+        // Render specialties grid
+        function renderSpecialties() {
+            specialtyGrid.innerHTML = '';
+            
+            specialtiesData.forEach(specialty => {
+                const specialtyCard = document.createElement('div');
+                specialtyCard.className = 'specialty-card';
+                specialtyCard.setAttribute('data-filter', specialty.filter);
+                
+                specialtyCard.innerHTML = `
+                    <div class="specialty-icon">
+                        <i class="${specialty.icon}"></i>
+                    </div>
+                    <h3>${specialty.name}</h3>
+                    <p>${specialty.description}</p>
+                `;
+                
+                specialtyGrid.appendChild(specialtyCard);
+            });
+        }
+
+        // Render doctors slider
+        function renderDoctors() {
+            doctorsSlider.innerHTML = '';
+            
+            doctorsData.forEach(doctor => {
+                const doctorCard = document.createElement('div');
+                doctorCard.className = 'doctor-card';
+                
+                // Generate random doctor image placeholder color
+                const colors = ['#0F4C75', '#3282B8', '#10B981', '#F97316'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                doctorCard.innerHTML = `
+                    <div class="doctor-img" style="background-color: ${randomColor}20; color: ${randomColor}">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>${doctor.name}</h3>
+                        <div class="doctor-specialty">${doctor.specialty}</div>
+                        <div class="doctor-qualifications">${doctor.qualifications}</div>
+                        <p>${doctor.description}</p>
+                        <a href="#contact" class="btn" style="margin-top: 10px;">Book Appointment</a>
+                    </div>
+                `;
+                
+                doctorsSlider.appendChild(doctorCard);
+            });
+        }
+
+        // Render services grid
+        function renderServices() {
+            servicesGrid.innerHTML = '';
+            
+            servicesData.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                
+                // Generate random service image placeholder color
+                const colors = ['#0F4C75', '#3282B8', '#10B981', '#F97316'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                serviceCard.innerHTML = `
+                    <div class="service-img" style="background-color: ${randomColor}20; color: ${randomColor}">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                        <ul style="margin-top: 15px; padding-left: 20px; color: var(--text-light);">
+                            ${service.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        <a href="#contact" class="btn" style="margin-top: 20px;">Learn More</a>
+                    </div>
+                `;
+                
+                servicesGrid.appendChild(serviceCard);
+            });
+        }
+
+        // Initialize Google Map
+        function initMap() {
+            const mapElement = document.getElementById('map');
+            
+            // Create a simple embedded map (for demo purposes)
+            // In a real implementation, you would use Google Maps API
+            mapElement.innerHTML = `
+                <div style="width: 100%; height: 100%; background-color: #e9f5fe; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: #0F4C75; margin-bottom: 20px;"></i>
+                    <h3 style="color: #0F4C75; margin-bottom: 10px;">Apex Hospital Itahari</h3>
+                    <p style="color: #64748B; text-align: center; max-width: 500px; padding: 0 20px;">
+                        Itahari, Sunsari, Nepal<br>
+                        <a href="https://maps.google.com/?q=Itahari+Sunsari+Nepal" target="_blank" style="color: #3282B8; text-decoration: underline; margin-top: 10px; display: inline-block;">Open in Google Maps</a>
+                    </p>
+                </div>
+            `;
+        }
+
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                this.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('#navMenu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // Specialty filter functionality
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Filter specialties
+                    const filter = this.getAttribute('data-filter');
+                    const specialtyCards = document.querySelectorAll('.specialty-card');
+                    
+                    specialtyCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-filter') === filter) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Show/hide back to top button
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+                
+                // Update active navigation link based on scroll position
+                updateActiveNavLink();
+            });
+
+            // Back to top button
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Appointment form submission
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const service = document.getElementById('service').value;
+                const message = document.getElementById('message').value;
+                
+                // In a real application, you would send this data to a server
+                // For demo purposes, we'll just show an alert
+                alert(`Thank you, ${name}! Your appointment request has been submitted. We will contact you at ${phone} soon to confirm your ${service} appointment.`);
+                
+                // Reset form
+                appointmentForm.reset();
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Update active navigation link based on scroll position
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#navMenu a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
