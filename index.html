@@ -1,1474 +1,1126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Northgate Academy — Excellence in Education</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0a1628;
-    --blue: #1a4a8a;
-    --sky: #2d7dd2;
-    --ice: #e8f4fd;
-    --frost: #f0f8ff;
-    --white: #ffffff;
-    --gray: #8a9bb0;
-    --light-gray: #f4f7fb;
-    --border: #d0dff0;
-    --shadow: 0 4px 24px rgba(26,74,138,0.10);
-    --shadow-lg: 0 12px 48px rgba(26,74,138,0.18);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--navy);
-    background: var(--white);
-    overflow-x: hidden;
-  }
-
-  /* ===== NAV ===== */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    transition: box-shadow 0.3s;
-  }
-  nav.scrolled { box-shadow: var(--shadow); }
-
-  .nav-inner {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 32px; height: 72px;
-  }
-
-  .logo {
-    display: flex; align-items: center; gap: 12px; text-decoration: none;
-  }
-
-  .logo-mark {
-    width: 42px; height: 42px;
-    background: linear-gradient(135deg, var(--blue), var(--sky));
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-weight: 900; color: white; font-size: 18px;
-    letter-spacing: -1px;
-    box-shadow: 0 4px 12px rgba(45,125,210,0.4);
-  }
-
-  .logo-text { display: flex; flex-direction: column; }
-  .logo-name {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700; font-size: 16px; color: var(--navy);
-    line-height: 1.1;
-  }
-  .logo-sub { font-size: 10px; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; }
-
-  .nav-links {
-    display: flex; align-items: center; gap: 4px; list-style: none;
-  }
-  .nav-links a {
-    text-decoration: none; color: var(--navy);
-    font-size: 14px; font-weight: 500;
-    padding: 8px 16px; border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .nav-links a:hover { background: var(--ice); color: var(--blue); }
-  .nav-links a.active { color: var(--sky); }
-
-  .nav-cta {
-    background: linear-gradient(135deg, var(--blue), var(--sky));
-    color: white !important;
-    padding: 10px 22px !important;
-    border-radius: 10px !important;
-    box-shadow: 0 4px 14px rgba(45,125,210,0.35);
-    transition: transform 0.2s, box-shadow 0.2s !important;
-  }
-  .nav-cta:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(45,125,210,0.45) !important;
-    background: var(--ice) !important;
-    color: white !important;
-  }
-
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
-  .hamburger span { width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: 0.3s; display: block; }
-
-  /* ===== SECTIONS ===== */
-  .section { display: none; }
-  .section.active { display: block; }
-
-  /* ===== HERO ===== */
-  #home { display: block; }
-
-  .hero {
-    min-height: 100vh;
-    background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 55%, var(--sky) 100%);
-    display: flex; align-items: center;
-    position: relative; overflow: hidden;
-    padding-top: 72px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(circle at 20% 50%, rgba(45,125,210,0.3) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%);
-  }
-
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  .hero-shapes {
-    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
-  }
-  .shape {
-    position: absolute; border-radius: 50%;
-    background: rgba(255,255,255,0.04);
-    animation: float 8s ease-in-out infinite;
-  }
-  .shape-1 { width: 400px; height: 400px; top: -100px; right: -100px; animation-delay: 0s; }
-  .shape-2 { width: 250px; height: 250px; bottom: 100px; right: 15%; animation-delay: 2s; }
-  .shape-3 { width: 150px; height: 150px; top: 30%; left: 5%; animation-delay: 4s; }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-  }
-
-  .hero-content {
-    max-width: 1200px; margin: 0 auto; padding: 80px 32px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-    align-items: center; position: relative; z-index: 1;
-  }
-
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 16px; border-radius: 100px;
-    font-size: 12px; color: rgba(255,255,255,0.85);
-    letter-spacing: 1px; text-transform: uppercase;
-    margin-bottom: 28px;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-badge::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: #4ade80; box-shadow: 0 0 8px #4ade80;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 5vw, 68px); font-weight: 900;
-    color: white; line-height: 1.1; margin-bottom: 24px;
-    animation: fadeUp 0.8s ease 0.1s both;
-  }
-  .hero-title span { color: #7dd3fc; }
-
-  .hero-desc {
-    font-size: 17px; color: rgba(255,255,255,0.75);
-    line-height: 1.7; margin-bottom: 40px;
-    animation: fadeUp 0.8s ease 0.2s both;
-  }
-
-  .hero-buttons {
-    display: flex; gap: 16px; flex-wrap: wrap;
-    animation: fadeUp 0.8s ease 0.3s both;
-  }
-
-  .btn-primary {
-    background: white; color: var(--blue);
-    padding: 16px 32px; border-radius: 12px;
-    font-size: 15px; font-weight: 600;
-    text-decoration: none; cursor: pointer; border: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
-
-  .btn-secondary {
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: white;
-    padding: 16px 32px; border-radius: 12px;
-    font-size: 15px; font-weight: 500;
-    text-decoration: none; cursor: pointer;
-    transition: background 0.2s;
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .btn-secondary:hover { background: rgba(255,255,255,0.2); }
-
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: rgba(255,255,255,0.1);
-    border-radius: 16px; overflow: hidden; margin-top: 48px;
-    animation: fadeUp 0.8s ease 0.4s both;
-    border: 1px solid rgba(255,255,255,0.15);
-  }
-  .stat {
-    background: rgba(10,22,40,0.4);
-    padding: 20px; text-align: center;
-    backdrop-filter: blur(10px);
-  }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px; font-weight: 900; color: white; display: block;
-  }
-  .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; margin-top: 2px; display: block; }
-
-  .hero-card {
-    animation: fadeIn 1s ease 0.3s both;
-  }
-
-  .school-banner {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 24px; padding: 40px;
-    backdrop-filter: blur(10px);
-    text-align: center;
-  }
-
-  .school-logo-large {
-    width: 100px; height: 100px;
-    background: white;
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  }
-  .school-logo-large svg { width: 60px; height: 60px; }
-
-  .banner-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px; font-weight: 900; color: white; margin-bottom: 8px;
-  }
-  .banner-year { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px; }
-
-  .banner-items { list-style: none; text-align: left; }
-  .banner-items li {
-    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.8); font-size: 14px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .banner-items li:last-child { border-bottom: none; }
-  .banner-items li::before {
-    content: '✓'; background: rgba(74,222,128,0.2); color: #4ade80;
-    width: 22px; height: 22px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; flex-shrink: 0;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* ===== FEATURES ===== */
-  .features {
-    background: var(--light-gray); padding: 100px 32px;
-  }
-  .container { max-width: 1200px; margin: 0 auto; }
-
-  .section-tag {
-    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: var(--sky); font-weight: 600; margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px); font-weight: 700;
-    color: var(--navy); margin-bottom: 16px; line-height: 1.2;
-  }
-  .section-desc { font-size: 16px; color: var(--gray); max-width: 520px; line-height: 1.7; margin-bottom: 60px; }
-
-  .features-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  }
-
-  .feature-card {
-    background: white; border-radius: 20px; padding: 32px;
-    border: 1px solid var(--border);
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative; overflow: hidden;
-  }
-  .feature-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--sky));
-    transform: scaleX(0); transition: transform 0.3s; transform-origin: left;
-  }
-  .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .feature-card:hover::before { transform: scaleX(1); }
-
-  .feature-icon {
-    width: 52px; height: 52px;
-    background: var(--ice); border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; margin-bottom: 20px;
-  }
-  .feature-title { font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-  .feature-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
-
-  /* ===== APPLY BANNER ===== */
-  .apply-banner {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 80px 32px; text-align: center; position: relative; overflow: hidden;
-  }
-  .apply-banner::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(45,125,210,0.3), transparent 70%);
-  }
-  .apply-banner .container { position: relative; }
-  .apply-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 52px); font-weight: 900; color: white;
-    margin-bottom: 16px;
-  }
-  .apply-desc { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 40px; }
-  .apply-deadline {
-    display: inline-block;
-    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 100px; padding: 8px 20px; font-size: 13px; color: #7dd3fc;
-    margin-bottom: 32px; letter-spacing: 0.5px;
-  }
-
-  /* ===== ABOUT ===== */
-  .about-hero {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 140px 32px 80px; text-align: center;
-  }
-  .about-hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5vw, 64px); font-weight: 900; color: white; margin-bottom: 20px;
-  }
-  .about-hero p { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto; }
-
-  .about-content { padding: 100px 32px; background: white; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .about-text p { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 20px; }
-
-  .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
-  .value-item {
-    background: var(--ice); border-radius: 14px; padding: 20px;
-    border: 1px solid var(--border);
-  }
-  .value-label { font-weight: 600; color: var(--navy); font-size: 14px; margin-bottom: 4px; }
-  .value-text { font-size: 13px; color: var(--gray); }
-
-  .about-image-block {
-    background: linear-gradient(135deg, var(--ice) 0%, white 100%);
-    border-radius: 24px; padding: 48px; border: 1px solid var(--border);
-    text-align: center;
-  }
-  .big-stat { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 900; color: var(--blue); line-height: 1; }
-  .big-stat-label { font-size: 16px; color: var(--gray); margin-top: 8px; }
-
-  .about-stats-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    background: var(--light-gray); padding: 60px 32px;
-  }
-  .about-stat-item { text-align: center; }
-  .about-stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 44px; font-weight: 900; color: var(--blue); display: block;
-  }
-  .about-stat-text { font-size: 14px; color: var(--gray); margin-top: 4px; }
-
-  /* ===== ACADEMICS ===== */
-  .academics-hero {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 140px 32px 80px; text-align: center;
-  }
-  .academics-hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5vw, 64px); font-weight: 900; color: white; margin-bottom: 20px;
-  }
-  .academics-hero p { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto; }
-
-  .programs { padding: 100px 32px; background: white; }
-  .programs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-
-  .program-card {
-    border: 1px solid var(--border); border-radius: 20px; padding: 36px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    background: white; position: relative; overflow: hidden;
-  }
-  .program-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .program-card-accent {
-    position: absolute; top: 0; right: 0; width: 80px; height: 80px;
-    background: var(--ice); border-radius: 0 20px 0 80px;
-    display: flex; align-items: flex-start; justify-content: flex-end;
-    padding: 12px; font-size: 24px;
-  }
-  .program-grade {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--sky); font-weight: 600; margin-bottom: 8px;
-  }
-  .program-name { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
-  .program-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
-  .program-subjects { display: flex; flex-wrap: wrap; gap: 8px; }
-  .subject-tag {
-    background: var(--ice); color: var(--blue);
-    padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500;
-  }
-
-  /* ===== ADMISSIONS ===== */
-  .admissions-hero {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 140px 32px 80px; text-align: center;
-  }
-  .admissions-hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5vw, 64px); font-weight: 900; color: white; margin-bottom: 20px;
-  }
-  .admissions-hero p { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto; }
-
-  .admissions-content { padding: 80px 32px; background: var(--light-gray); }
-  .admissions-layout { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
-
-  /* FORM */
-  .form-card {
-    background: white; border-radius: 24px; padding: 48px;
-    box-shadow: var(--shadow); border: 1px solid var(--border);
-  }
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 6px;
-  }
-  .form-subtitle { font-size: 14px; color: var(--gray); margin-bottom: 36px; }
-
-  .form-section-label {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--sky); font-weight: 600; margin: 28px 0 16px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .form-section-label::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { margin-bottom: 16px; }
-
-  label {
-    display: block; font-size: 13px; font-weight: 500; color: var(--navy);
-    margin-bottom: 6px;
-  }
-  .required { color: var(--sky); }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%; padding: 12px 16px;
-    border: 1.5px solid var(--border); border-radius: 10px;
-    font-size: 14px; font-family: 'DM Sans', sans-serif;
-    color: var(--navy); background: white;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--sky);
-    box-shadow: 0 0 0 3px rgba(45,125,210,0.12);
-  }
-
-  textarea { resize: vertical; min-height: 100px; }
-  select { cursor: pointer; }
-
-  .file-upload {
-    border: 2px dashed var(--border); border-radius: 10px;
-    padding: 32px; text-align: center; cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    background: var(--frost);
-  }
-  .file-upload:hover { border-color: var(--sky); background: var(--ice); }
-  .file-upload input { display: none; }
-  .file-icon { font-size: 32px; margin-bottom: 8px; }
-  .file-text { font-size: 14px; color: var(--gray); }
-  .file-text strong { color: var(--blue); }
-  .file-hint { font-size: 12px; color: var(--gray); margin-top: 6px; }
-
-  .form-submit {
-    margin-top: 32px;
-    background: linear-gradient(135deg, var(--blue), var(--sky));
-    color: white; border: none; width: 100%;
-    padding: 16px; border-radius: 12px;
-    font-size: 16px; font-weight: 600; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    box-shadow: 0 8px 24px rgba(45,125,210,0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,125,210,0.45); }
-
-  .form-note { font-size: 12px; color: var(--gray); text-align: center; margin-top: 12px; }
-
-  /* Sidebar */
-  .sidebar { display: flex; flex-direction: column; gap: 20px; }
-
-  .info-card {
-    background: white; border-radius: 20px; padding: 28px;
-    border: 1px solid var(--border); box-shadow: var(--shadow);
-  }
-  .info-card-title { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
-
-  .timeline { list-style: none; }
-  .timeline li {
-    display: flex; gap: 14px; margin-bottom: 16px; font-size: 14px;
-  }
-  .timeline li:last-child { margin-bottom: 0; }
-  .tl-dot {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: var(--ice); border: 2px solid var(--sky);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 11px; color: var(--blue); font-weight: 700;
-  }
-  .tl-info strong { display: block; color: var(--navy); font-size: 13px; font-weight: 500; }
-  .tl-info span { color: var(--gray); font-size: 12px; }
-
-  .req-list { list-style: none; }
-  .req-list li {
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-    font-size: 13px; color: var(--gray);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .req-list li:last-child { border-bottom: none; }
-  .req-list li::before {
-    content: '📄'; font-size: 14px;
-  }
-
-  .deadline-card {
-    background: linear-gradient(135deg, var(--blue), var(--sky));
-    border-radius: 20px; padding: 28px; text-align: center; color: white;
-  }
-  .deadline-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-bottom: 12px; }
-  .deadline-date { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; margin-bottom: 4px; }
-  .deadline-year { font-size: 14px; opacity: 0.75; }
-
-  /* Success */
-  .success-overlay {
-    display: none; position: fixed; inset: 0; background: rgba(10,22,40,0.6);
-    z-index: 1000; align-items: center; justify-content: center;
-    backdrop-filter: blur(4px);
-  }
-  .success-overlay.show { display: flex; }
-  .success-modal {
-    background: white; border-radius: 24px; padding: 60px 48px;
-    max-width: 480px; width: 90%; text-align: center;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
-    animation: scaleIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  @keyframes scaleIn {
-    from { transform: scale(0.85); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  .success-icon { font-size: 64px; margin-bottom: 20px; }
-  .success-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px; font-weight: 700; color: var(--navy); margin-bottom: 12px;
-  }
-  .success-msg { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 32px; }
-  .success-ref {
-    background: var(--ice); border-radius: 10px; padding: 14px;
-    font-size: 13px; color: var(--blue); font-weight: 500; margin-bottom: 28px;
-  }
-
-  /* ===== CONTACT ===== */
-  .contact-hero {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 140px 32px 80px; text-align: center;
-  }
-  .contact-hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5vw, 64px); font-weight: 900; color: white; margin-bottom: 20px;
-  }
-  .contact-hero p { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto; }
-
-  .contact-content { padding: 100px 32px; background: white; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-
-  .contact-info-item {
-    display: flex; gap: 16px; margin-bottom: 32px;
-  }
-  .contact-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    background: var(--ice); display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-  .contact-info-label { font-size: 12px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-  .contact-info-value { font-size: 15px; font-weight: 500; color: var(--navy); }
-  .contact-info-value a { color: var(--sky); text-decoration: none; }
-
-  .map-container {
-    border-radius: 20px; overflow: hidden;
-    border: 1px solid var(--border); box-shadow: var(--shadow);
-    height: 360px;
-  }
-  .map-container iframe { width: 100%; height: 100%; border: none; }
-
-  /* ===== FOOTER ===== */
-  footer {
-    background: var(--navy); padding: 60px 32px 32px;
-  }
-  .footer-grid {
-    max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
-    margin-bottom: 48px;
-  }
-  .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 16px; }
-  .footer-heading { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
-  .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: 10px; }
-  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.2s; cursor: pointer; }
-  .footer-links a:hover { color: #7dd3fc; }
-
-  .footer-bottom {
-    max-width: 1200px; margin: 0 auto;
-    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
-  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.3); font-style: italic; }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    .hero-content { grid-template-columns: 1fr; gap: 48px; }
-    .hero-card { display: none; }
-    .features-grid { grid-template-columns: 1fr 1fr; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; }
-    .admissions-layout { grid-template-columns: 1fr; }
-    .sidebar { grid-row: 1; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    .about-stats-row { grid-template-columns: 1fr 1fr; }
-    .programs-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 600px) {
-    .nav-links { display: none; flex-direction: column; background: white; position: absolute; top: 72px; left: 0; right: 0; padding: 20px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
-    .nav-links.open { display: flex; }
-    .hamburger { display: flex; }
-    .features-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .values-grid { grid-template-columns: 1fr; }
-    .about-stats-row { grid-template-columns: 1fr 1fr; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountlink Telecommunication - Fast & Reliable ISP in Nepal</title>
+    <meta name="description" content="Mountlink Telecommunication - Your trusted ISP partner in Dhankuta, Dharan, and Eastern Nepal. High-speed internet with IPTV, 5Ghz routers, and 24/7 support.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary: #0B3B5C;      /* Deep navy blue */
+            --primary-dark: #06293F;
+            --primary-light: #1A4D73;
+            --accent: #FF6B35;        /* Vibrant orange */
+            --accent-dark: #E54E1B;
+            --accent-light: #FF8A5C;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-600: #6C757D;
+            --gray-900: #212529;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--gray-900);
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; }
+        p { color: var(--gray-600); }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--accent);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .login-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--gray-300);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            background: var(--gray-100);
+            border-color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="2"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            padding: 3rem 0;
+            background: var(--gray-100);
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .action-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .action-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .action-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .action-card p {
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-header h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* IPTV Section */
+        .iptv-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+        }
+
+        .iptv-section h2 {
+            color: var(--white);
+        }
+
+        .iptv-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .iptv-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .iptv-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .iptv-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .iptv-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .iptv-card p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 0;
+            background: var(--gray-100);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 2px solid var(--accent);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured .pricing-header {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .pricing-header h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .speed {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .pricing-body {
+            padding: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features i {
+            color: var(--accent);
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pricing-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: var(--accent);
+        }
+
+        .pricing-card.featured .pricing-btn:hover {
+            background: var(--accent-dark);
+        }
+
+        /* Coverage Section */
+        .coverage {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .coverage-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .coverage-map {
+            background: var(--gray-100);
+            border-radius: 10px;
+            padding: 2rem;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+        }
+
+        .coverage-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .coverage-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .coverage-list i {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-widget h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-widget h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .contact-info i {
+            color: var(--accent);
+            min-width: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .payment-partners {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .payment-partners img {
+            height: 30px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            
+            .features-grid,
+            .pricing-grid,
+            .iptv-grid,
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 2rem;
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .header-actions {
+                display: none;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .action-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .coverage-content {
+                grid-template-columns: 1fr;
+            }
+
+            .coverage-map {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .features-grid,
+            .pricing-grid,
+            .iptv-grid,
+            .action-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a class="logo" href="#" onclick="showSection('home')">
-      <div class="logo-mark">N</div>
-      <div class="logo-text">
-        <span class="logo-name">Northgate Academy</span>
-        <span class="logo-sub">Est. 1985</span>
-      </div>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#" onclick="showSection('home')" class="active" id="nav-home">Home</a></li>
-      <li><a href="#" onclick="showSection('about')" id="nav-about">About Us</a></li>
-      <li><a href="#" onclick="showSection('admissions')" id="nav-admissions">Admissions</a></li>
-      <li><a href="#" onclick="showSection('academics')" id="nav-academics">Academics</a></li>
-      <li><a href="#" onclick="showSection('contact')" id="nav-contact">Contact</a></li>
-      <li><a href="#" class="nav-cta" onclick="showSection('admissions')">Apply Now</a></li>
-    </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
-
-<!-- ===== HOME ===== -->
-<div id="home" class="section active">
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-    </div>
-    <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-badge">Admissions Open · 2025–26</div>
-        <h1 class="hero-title">
-          Shaping <span>Tomorrow's</span><br>Leaders Today
-        </h1>
-        <p class="hero-desc">
-          At Northgate Academy, we cultivate curious minds and compassionate leaders through rigorous academics, innovative programs, and a vibrant school community.
-        </p>
-        <div class="hero-buttons">
-          <button class="btn-primary" onclick="showSection('admissions')">
-            🎓 Apply for Admission
-          </button>
-          <button class="btn-secondary" onclick="showSection('about')">
-            Learn More →
-          </button>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-num">1,800+</span>
-            <span class="stat-label">Students</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num">98%</span>
-            <span class="stat-label">Pass Rate</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num">40+</span>
-            <span class="stat-label">Years Strong</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="school-banner">
-          <div class="school-logo-large">
-            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M30 5L5 20v4l25-14 25 14v-4L30 5z" fill="#1a4a8a"/>
-              <rect x="10" y="24" width="8" height="20" rx="1" fill="#2d7dd2"/>
-              <rect x="26" y="20" width="8" height="24" rx="1" fill="#1a4a8a"/>
-              <rect x="42" y="24" width="8" height="20" rx="1" fill="#2d7dd2"/>
-              <rect x="8" y="43" width="44" height="4" rx="1" fill="#0a1628"/>
-              <path d="M25 32h10v12H25z" fill="#e8f4fd"/>
-              <circle cx="30" cy="38" r="2" fill="#2d7dd2"/>
-            </svg>
-          </div>
-          <div class="banner-title">Northgate Academy</div>
-          <div class="banner-year">ESTABLISHED 1985 · KATHMANDU</div>
-          <ul class="banner-items">
-            <li>CBSE & Cambridge Curriculum</li>
-            <li>State-of-the-art STEM Labs</li>
-            <li>Olympic Sports Complex</li>
-            <li>100% University Placement</li>
-            <li>Merit & Need-based Scholarships</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="features">
-    <div class="container">
-      <p class="section-tag">Why Choose Us</p>
-      <h2 class="section-title">A Complete Education<br>for the Modern World</h2>
-      <p class="section-desc">We go beyond textbooks to provide holistic education that prepares students for university, career, and life.</p>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🏆</div>
-          <div class="feature-title">Academic Excellence</div>
-          <div class="feature-desc">Consistently ranked among the top schools with a 98% board exam pass rate and dozens of merit scholars each year.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔬</div>
-          <div class="feature-title">STEM Innovation Hub</div>
-          <div class="feature-desc">Fully equipped laboratories for physics, chemistry, biology, and computer science. Robotics and coding clubs available.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎭</div>
-          <div class="feature-title">Arts & Culture</div>
-          <div class="feature-desc">Rich programs in music, visual arts, drama, and cultural studies that nurture creativity and self-expression.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚽</div>
-          <div class="feature-title">Sports & Wellness</div>
-          <div class="feature-desc">Olympic-standard facilities including a swimming pool, football ground, basketball courts, and a fully equipped gym.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌍</div>
-          <div class="feature-title">Global Perspective</div>
-          <div class="feature-desc">Exchange programs, international competitions, and partnerships with schools in 12 countries around the world.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">👨‍👩‍👧‍👦</div>
-          <div class="feature-title">Caring Community</div>
-          <div class="feature-desc">A safe, inclusive, and nurturing environment where every student is seen, supported, and celebrated.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Apply Banner -->
-  <section class="apply-banner">
-    <div class="container">
-      <div class="apply-deadline">📅 Admission Deadline: March 31, 2026</div>
-      <h2 class="apply-title">Ready to Join the<br>Northgate Family?</h2>
-      <p class="apply-desc">Applications are now open for the 2025–26 academic year. Limited seats available — apply early to secure your spot.</p>
-      <button class="btn-primary" onclick="showSection('admissions')" style="margin: 0 auto; display: inline-flex;">
-        🎓 Apply for Admission Now
-      </button>
-    </div>
-  </section>
-</div>
-
-<!-- ===== ABOUT ===== -->
-<div id="about" class="section">
-  <div class="about-hero">
-    <h1>About Northgate Academy</h1>
-    <p>Forty years of nurturing brilliant minds and building exceptional character in the heart of Kathmandu.</p>
-  </div>
-
-  <div class="about-stats-row container">
-    <div class="about-stat-item">
-      <span class="about-stat-num">1,800+</span>
-      <span class="about-stat-text">Enrolled Students</span>
-    </div>
-    <div class="about-stat-item">
-      <span class="about-stat-num">120+</span>
-      <span class="about-stat-text">Dedicated Faculty</span>
-    </div>
-    <div class="about-stat-item">
-      <span class="about-stat-num">98%</span>
-      <span class="about-stat-text">Board Pass Rate</span>
-    </div>
-    <div class="about-stat-item">
-      <span class="about-stat-num">40+</span>
-      <span class="about-stat-text">Years of Excellence</span>
-    </div>
-  </div>
-
-  <div class="about-content">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text">
-          <p class="section-tag">Our Story</p>
-          <h2 class="section-title">Rooted in Excellence,<br>Growing Toward the Future</h2>
-          <p>Founded in 1985 by visionary educator Dr. Arjun Sharma, Northgate Academy began as a small school with 80 students and a singular mission: provide world-class education to every child, regardless of background.</p>
-          <p>Today, we are one of Nepal's most respected educational institutions — home to over 1,800 students, 120 expert faculty members, and a legacy of graduates who lead in medicine, law, technology, business, and public service across the globe.</p>
-          <p>Our CBSE and Cambridge curricula are delivered with innovation and care, preparing students not just for exams, but for life's greatest challenges and opportunities.</p>
-          <div class="values-grid">
-            <div class="value-item">
-              <div class="value-label">🎯 Our Mission</div>
-              <div class="value-text">Empower every student to discover their purpose and reach their full potential.</div>
-            </div>
-            <div class="value-item">
-              <div class="value-label">🌟 Our Vision</div>
-              <div class="value-text">To be Nepal's leading institution for holistic, future-ready education.</div>
-            </div>
-            <div class="value-item">
-              <div class="value-label">💡 Innovation</div>
-              <div class="value-text">Embracing technology and modern pedagogy to keep learning engaging and effective.</div>
-            </div>
-            <div class="value-item">
-              <div class="value-label">🤝 Inclusivity</div>
-              <div class="value-text">Every student deserves a safe, welcoming, and supportive school environment.</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="about-image-block">
-            <div class="big-stat">40+</div>
-            <div class="big-stat-label">Years of transforming lives through education</div>
-            <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border);">
-              <div style="font-size: 14px; color: var(--gray); line-height: 1.8;">
-                <strong style="color: var(--navy);">Accreditations & Affiliations</strong><br>
-                ✓ CBSE Affiliated (Since 1990)<br>
-                ✓ Cambridge International Partner<br>
-                ✓ ISO 9001:2015 Certified<br>
-                ✓ Nepal Education Board Recognized<br>
-                ✓ British Council Partner School
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== ACADEMICS ===== -->
-<div id="academics" class="section">
-  <div class="academics-hero">
-    <h1>Academic Programs</h1>
-    <p>Rigorous, inspiring curricula designed to challenge students, ignite curiosity, and build lifelong learners.</p>
-  </div>
-
-  <div class="programs">
-    <div class="container">
-      <p class="section-tag">Our Programs</p>
-      <h2 class="section-title" style="margin-bottom: 16px;">From Foundation to<br>Advanced Studies</h2>
-      <p class="section-desc">Our programs span from early childhood through senior secondary, each designed for the specific developmental needs of each age group.</p>
-      <div class="programs-grid">
-        <div class="program-card">
-          <div class="program-card-accent">🌱</div>
-          <div class="program-grade">Grades Pre-K – 2</div>
-          <div class="program-name">Early Childhood Program</div>
-          <div class="program-desc">Play-based learning that builds foundational literacy, numeracy, social skills, and a love of learning through exploration, creativity, and imagination.</div>
-          <div class="program-subjects">
-            <span class="subject-tag">Reading & Writing</span>
-            <span class="subject-tag">Math Foundations</span>
-            <span class="subject-tag">Art & Music</span>
-            <span class="subject-tag">Physical Ed</span>
-          </div>
-        </div>
-        <div class="program-card">
-          <div class="program-card-accent">📚</div>
-          <div class="program-grade">Grades 3 – 5</div>
-          <div class="program-name">Primary School</div>
-          <div class="program-desc">Building core academic skills with inquiry-based projects, structured literacy, and introduction to sciences and social studies in an engaging classroom environment.</div>
-          <div class="program-subjects">
-            <span class="subject-tag">English</span>
-            <span class="subject-tag">Mathematics</span>
-            <span class="subject-tag">Science</span>
-            <span class="subject-tag">Social Studies</span>
-            <span class="subject-tag">Languages</span>
-          </div>
-        </div>
-        <div class="program-card">
-          <div class="program-card-accent">🔭</div>
-          <div class="program-grade">Grades 6 – 8</div>
-          <div class="program-name">Middle School</div>
-          <div class="program-desc">Challenging students with departmentalized learning, critical thinking projects, electives, and preparation for the demands of high school academics and beyond.</div>
-          <div class="program-subjects">
-            <span class="subject-tag">Advanced Sciences</span>
-            <span class="subject-tag">Algebra</span>
-            <span class="subject-tag">History</span>
-            <span class="subject-tag">Coding</span>
-            <span class="subject-tag">French/Nepali</span>
-          </div>
-        </div>
-        <div class="program-card">
-          <div class="program-card-accent">🎓</div>
-          <div class="program-grade">Grades 9 – 12</div>
-          <div class="program-name">Senior Secondary (CBSE / Cambridge)</div>
-          <div class="program-desc">University-preparatory program with choice of Science, Commerce, or Humanities streams. Expert coaching, career counseling, and exam preparation included.</div>
-          <div class="program-subjects">
-            <span class="subject-tag">Physics / Chemistry</span>
-            <span class="subject-tag">Biology</span>
-            <span class="subject-tag">Mathematics</span>
-            <span class="subject-tag">Economics</span>
-            <span class="subject-tag">Computer Sci.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="features" style="padding-top: 0;">
-    <div class="container">
-      <p class="section-tag">Beyond Classrooms</p>
-      <h2 class="section-title" style="margin-bottom: 16px;">Co-Curricular Excellence</h2>
-      <p class="section-desc">Our programs extend well beyond academic subjects to develop the whole child.</p>
-      <div class="features-grid">
-        <div class="feature-card"><div class="feature-icon">🤖</div><div class="feature-title">Robotics & AI Club</div><div class="feature-desc">Hands-on engineering and programming challenges that prepare students for the future of technology.</div></div>
-        <div class="feature-card"><div class="feature-icon">🎻</div><div class="feature-title">Music & Performing Arts</div><div class="feature-desc">Orchestra, choir, band, drama, and dance programs with annual public performances.</div></div>
-        <div class="feature-card"><div class="feature-icon">📰</div><div class="feature-title">Student Journalism</div><div class="feature-desc">A student-run newspaper and video channel teaching real-world communication and media skills.</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ===== ADMISSIONS ===== -->
-<div id="admissions" class="section">
-  <div class="admissions-hero">
-    <h1>Apply for Admission</h1>
-    <p>Begin your Northgate journey. Fill out the form below and we'll guide you through every step of the process.</p>
-  </div>
-
-  <div class="admissions-content">
-    <div class="container">
-      <div class="admissions-layout">
-        <div class="form-card">
-          <h2 class="form-title">Online Admission Form</h2>
-          <p class="form-subtitle">Academic Year 2025–2026 · Fields marked <span class="required">*</span> are required</p>
-
-          <form id="admissionForm" onsubmit="submitForm(event)">
-            <!-- Student Info -->
-            <div class="form-section-label">Student Information</div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label>Student Full Name <span class="required">*</span></label>
-                <input type="text" name="studentName" placeholder="As on birth certificate" required>
-              </div>
-              <div class="form-group">
-                <label>Date of Birth <span class="required">*</span></label>
-                <input type="date" name="dob" required>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label>Gender <span class="required">*</span></label>
-                <select name="gender" required>
-                  <option value="">Select gender</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Prefer not to say</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Grade Applying For <span class="required">*</span></label>
-                <select name="grade" required>
-                  <option value="">Select grade</option>
-                  <option>Pre-Kindergarten</option>
-                  <option>Kindergarten</option>
-                  <option>Grade 1</option>
-                  <option>Grade 2</option>
-                  <option>Grade 3</option>
-                  <option>Grade 4</option>
-                  <option>Grade 5</option>
-                  <option>Grade 6</option>
-                  <option>Grade 7</option>
-                  <option>Grade 8</option>
-                  <option>Grade 9 (CBSE)</option>
-                  <option>Grade 9 (Cambridge)</option>
-                  <option>Grade 10 (CBSE)</option>
-                  <option>Grade 10 (Cambridge)</option>
-                  <option>Grade 11 – Science</option>
-                  <option>Grade 11 – Commerce</option>
-                  <option>Grade 11 – Humanities</option>
-                  <option>Grade 12 – Science</option>
-                  <option>Grade 12 – Commerce</option>
-                  <option>Grade 12 – Humanities</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Previous School Name</label>
-              <input type="text" name="prevSchool" placeholder="Name of last attended school">
-            </div>
-
-            <!-- Parent/Guardian Info -->
-            <div class="form-section-label">Parent / Guardian Information</div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label>Parent / Guardian Name <span class="required">*</span></label>
-                <input type="text" name="parentName" placeholder="Full name" required>
-              </div>
-              <div class="form-group">
-                <label>Relationship to Student</label>
-                <select name="relation">
-                  <option value="">Select relationship</option>
-                  <option>Mother</option>
-                  <option>Father</option>
-                  <option>Guardian</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label>Phone Number <span class="required">*</span></label>
-                <input type="tel" name="phone" placeholder="+977 98xxxxxxxx" required>
-              </div>
-              <div class="form-group">
-                <label>Email Address <span class="required">*</span></label>
-                <input type="email" name="email" placeholder="your@email.com" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Residential Address <span class="required">*</span></label>
-              <textarea name="address" placeholder="Street, Ward, Municipality, District, Province" required></textarea>
-            </div>
-
-            <!-- Documents -->
-            <div class="form-section-label">Required Documents</div>
-
-            <div class="form-group">
-              <label>Upload Documents</label>
-              <div class="file-upload" onclick="document.getElementById('docUpload').click()">
-                <input type="file" id="docUpload" name="documents" multiple accept=".pdf,.jpg,.png,.doc,.docx" onchange="updateFileLabel(this)">
-                <div class="file-icon" id="fileIcon">📁</div>
-                <div class="file-text" id="fileText"><strong>Click to upload</strong> or drag and drop</div>
-                <div class="file-hint">Birth certificate, report cards, transfer certificate, ID (PDF, JPG, PNG · Max 10MB each)</div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Additional Information / Special Needs</label>
-              <textarea name="notes" placeholder="Any medical conditions, learning needs, or other information we should know..." style="min-height: 80px;"></textarea>
-            </div>
-
-            <div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-top: 8px;">
-              <input type="checkbox" id="terms" name="terms" required style="width: auto; margin-top: 3px;">
-              <label for="terms" style="font-size: 13px; color: var(--gray); font-weight: 400; cursor: pointer;">
-                I confirm that all information provided is accurate and complete. I agree to the school's <a href="#" style="color: var(--sky);">Terms & Conditions</a> and <a href="#" style="color: var(--sky);">Privacy Policy</a>. <span class="required">*</span>
-              </label>
-            </div>
-
-            <button type="submit" class="form-submit">
-              <span>🎓</span> Submit Application
-            </button>
-            <p class="form-note">You will receive a confirmation email with your application reference number within 24 hours.</p>
-          </form>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <div class="deadline-card">
-            <div class="deadline-label">Application Deadline</div>
-            <div class="deadline-date">March 31</div>
-            <div class="deadline-year">2026 · Academic Year 2025–26</div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-card-title">📋 Admission Process</div>
-            <ul class="timeline">
-              <li>
-                <div class="tl-dot">1</div>
-                <div class="tl-info">
-                  <strong>Submit Application</strong>
-                  <span>Complete this online form</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="https://mountlink.net.np/wp-content/uploads/2025/09/cropped-IMG_2097-Photoroom.png" alt="Mountlink Telecommunication">
                 </div>
-              </li>
-              <li>
-                <div class="tl-dot">2</div>
-                <div class="tl-info">
-                  <strong>Document Review</strong>
-                  <span>2–3 business days</span>
-                </div>
-              </li>
-              <li>
-                <div class="tl-dot">3</div>
-                <div class="tl-info">
-                  <strong>Entrance Assessment</strong>
-                  <span>Grades 3+ only</span>
-                </div>
-              </li>
-              <li>
-                <div class="tl-dot">4</div>
-                <div class="tl-info">
-                  <strong>Interview</strong>
-                  <span>Student & parent meeting</span>
-                </div>
-              </li>
-              <li>
-                <div class="tl-dot">5</div>
-                <div class="tl-info">
-                  <strong>Admission Decision</strong>
-                  <span>Offer letter via email</span>
-                </div>
-              </li>
-              <li>
-                <div class="tl-dot">6</div>
-                <div class="tl-info">
-                  <strong>Fee Payment & Enrollment</strong>
-                  <span>Secure your seat</span>
-                </div>
-              </li>
-            </ul>
-          </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Packages</a></li>
+                    <li><a href="#">IPTV</a></li>
+                    <li><a href="#">Coverage</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
 
-          <div class="info-card">
-            <div class="info-card-title">📄 Required Documents</div>
-            <ul class="req-list">
-              <li>Birth Certificate (original or copy)</li>
-              <li>Last 2 years' report cards</li>
-              <li>Transfer / Leaving Certificate</li>
-              <li>Passport-size photographs (x4)</li>
-              <li>Parent/Guardian ID proof</li>
-              <li>Residence proof</li>
-            </ul>
-          </div>
+                <div class="header-actions">
+                    <a href="#" class="login-btn"><i class="fas fa-user"></i> Login</a>
+                    <a href="#" class="btn btn-primary">Get Connected</a>
+                </div>
 
-          <div class="info-card">
-            <div class="info-card-title">💰 Fee Structure</div>
-            <div style="font-size: 13px; color: var(--gray); line-height: 2;">
-              <div style="display: flex; justify-content: space-between;"><span>Registration Fee</span><strong style="color: var(--navy);">NPR 2,000</strong></div>
-              <div style="display: flex; justify-content: space-between;"><span>Tuition (Monthly)</span><strong style="color: var(--navy);">NPR 8,000+</strong></div>
-              <div style="display: flex; justify-content: space-between;"><span>Annual Fee</span><strong style="color: var(--navy);">NPR 15,000</strong></div>
-              <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
-                <span style="color: var(--sky);">🎓 Merit scholarships available — ask during interview</span>
-              </div>
+                <div class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
-          </div>
-
-          <div class="info-card" style="background: var(--ice);">
-            <div class="info-card-title">📞 Need Help?</div>
-            <p style="font-size: 13px; color: var(--gray); margin-bottom: 12px;">Our admissions team is happy to answer your questions.</p>
-            <p style="font-size: 14px; color: var(--navy); font-weight: 500;">+977-1-4XXXXXX</p>
-            <p style="font-size: 14px; color: var(--sky);">admissions@northgateacademy.edu.np</p>
-            <p style="font-size: 12px; color: var(--gray); margin-top: 8px;">Mon–Fri: 8:00 AM – 4:00 PM</p>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </header>
 
-<!-- ===== CONTACT ===== -->
-<div id="contact" class="section">
-  <div class="contact-hero">
-    <h1>Get in Touch</h1>
-    <p>We'd love to hear from you. Reach out to our team and we'll respond within one business day.</p>
-  </div>
-
-  <div class="contact-content">
-    <div class="container">
-      <div class="contact-grid">
-        <div>
-          <p class="section-tag">Contact Information</p>
-          <h2 class="section-title" style="margin-bottom: 40px;">We're Here<br>to Help</h2>
-
-          <div class="contact-info-item">
-            <div class="contact-icon">📍</div>
-            <div>
-              <div class="contact-info-label">Address</div>
-              <div class="contact-info-value">Northgate Academy<br>Baluwatar, Ward 4<br>Kathmandu 44600, Nepal</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Fast, Reliable Internet <br>for Eastern Nepal</h1>
+                <p>Experience lightning-fast speeds with 5Ghz routers, IPTV, and 24/7 support. Now serving Dhankuta, Dharan, and surrounding areas with fiber optic connectivity.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Check Availability</a>
+                    <a href="#" class="btn btn-outline">View Packages</a>
+                </div>
             </div>
-          </div>
-
-          <div class="contact-info-item">
-            <div class="contact-icon">📞</div>
-            <div>
-              <div class="contact-info-label">Phone Numbers</div>
-              <div class="contact-info-value">
-                <a href="tel:+97714123456">+977-1-4123456</a> (Main Office)<br>
-                <a href="tel:+97714123457">+977-1-4123457</a> (Admissions)<br>
-                <a href="tel:+9779812345678">+977-9812345678</a> (Mobile)
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-info-item">
-            <div class="contact-icon">✉️</div>
-            <div>
-              <div class="contact-info-label">Email Addresses</div>
-              <div class="contact-info-value">
-                <a href="mailto:info@northgateacademy.edu.np">info@northgateacademy.edu.np</a><br>
-                <a href="mailto:admissions@northgateacademy.edu.np">admissions@northgateacademy.edu.np</a><br>
-                <a href="mailto:principal@northgateacademy.edu.np">principal@northgateacademy.edu.np</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-info-item">
-            <div class="contact-icon">🕐</div>
-            <div>
-              <div class="contact-info-label">Office Hours</div>
-              <div class="contact-info-value">
-                Monday – Friday: 7:30 AM – 5:00 PM<br>
-                Saturday: 9:00 AM – 1:00 PM<br>
-                Sunday: Closed
-              </div>
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap;">
-            <a href="#" style="background: var(--ice); color: var(--blue); padding: 10px 20px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-              📘 Facebook
-            </a>
-            <a href="#" style="background: var(--ice); color: var(--blue); padding: 10px 20px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-              📸 Instagram
-            </a>
-            <a href="#" style="background: var(--ice); color: var(--blue); padding: 10px 20px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-              📺 YouTube
-            </a>
-          </div>
         </div>
+    </section>
 
-        <div>
-          <div class="map-container">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.6967282741847!2d85.32423!3d27.72048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190038c55c01%3A0xfab9db2752da1de4!2sBaluwatar%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1620000000000!5m2!1sen!2snp"
-              allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-          <div style="margin-top: 24px;">
-            <div class="info-card" style="border-radius: 16px;">
-              <div class="info-card-title">🚌 Getting Here</div>
-              <p style="font-size: 14px; color: var(--gray); line-height: 1.8;">
-                <strong style="color: var(--navy);">By Bus:</strong> Routes 22, 44, and 58 stop at Baluwatar Chowk (2 min walk)<br>
-                <strong style="color: var(--navy);">By Car:</strong> Ample parking available on campus — enter via Gate B on Baluwatar Road<br>
-                <strong style="color: var(--navy);">By Taxi:</strong> Ride-shares drop off at the main entrance on School Marg
-              </p>
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="container">
+            <div class="action-grid">
+                <a href="#" class="action-card">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Pay Online</h3>
+                    <p>Quick & secure payment</p>
+                </a>
+                <a href="#" class="action-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Refer & Earn</h3>
+                    <p>Get rewards for referrals</p>
+                </a>
+                <a href="#" class="action-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Request Callback</h3>
+                    <p>We'll call you back</p>
+                </a>
+                <a href="#" class="action-card">
+                    <i class="fas fa-file-signature"></i>
+                    <h3>New Connection</h3>
+                    <p>Start your service today</p>
+                </a>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="logo" style="margin-bottom: 0;">
-        <div class="logo-mark" style="background: linear-gradient(135deg, #2d7dd2, #7dd3fc);">N</div>
-        <div class="logo-text">
-          <span class="logo-name" style="color: white;">Northgate Academy</span>
-          <span class="logo-sub">Est. 1985</span>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Features</h2>
+                <p>More than just internet - complete digital solutions for your home and business</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>IPTV Service</h3>
+                    <p>185+ HD channels with pause & play feature. Turn your TV into a smart entertainment hub.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>5Ghz Router</h3>
+                    <p>Next-gen WiFi with faster speeds, better coverage, and reduced interference.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tower-broadcast"></i>
+                    </div>
+                    <h3>Wireless Backbone</h3>
+                    <p>Robust wireless infrastructure ensuring consistent connectivity even in remote areas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Service Assurance</h3>
+                    <p>We compensate for downtime. Your satisfaction is our priority.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <p>Nurturing brilliant minds and compassionate hearts since 1985. A school where every student discovers their potential and every family finds a community.</p>
-    </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a onclick="showSection('home')">Home</a></li>
-        <li><a onclick="showSection('about')">About Us</a></li>
-        <li><a onclick="showSection('academics')">Academics</a></li>
-        <li><a onclick="showSection('admissions')">Admissions</a></li>
-        <li><a onclick="showSection('contact')">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading">Admissions</div>
-      <ul class="footer-links">
-        <li><a onclick="showSection('admissions')">Apply Online</a></li>
-        <li><a href="#">Fee Structure</a></li>
-        <li><a href="#">Scholarships</a></li>
-        <li><a href="#">Entrance Exam</a></li>
-        <li><a href="#">FAQs</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading">Contact</div>
-      <ul class="footer-links">
-        <li><a href="tel:+97714123456">+977-1-4123456</a></li>
-        <li><a href="mailto:info@northgateacademy.edu.np">info@northgateacademy.edu.np</a></li>
-        <li><a href="#">Baluwatar, Kathmandu</a></li>
-        <li><a href="#">Mon–Fri: 7:30AM–5PM</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Northgate Academy. All rights reserved.</div>
-    <div class="footer-tagline">"Knowledge, Character, Service"</div>
-  </div>
-</footer>
+    </section>
 
-<!-- Success Modal -->
-<div class="success-overlay" id="successOverlay" onclick="closeSuccess(event)">
-  <div class="success-modal">
-    <div class="success-icon">🎓</div>
-    <h2 class="success-title">Application Submitted!</h2>
-    <p class="success-msg">Thank you for applying to Northgate Academy. Your application has been received and is under review. We're excited to learn more about your family!</p>
-    <div class="success-ref" id="successRef">Application Reference: NGA-2026-XXXX</div>
-    <p style="font-size: 13px; color: var(--gray); margin-bottom: 24px;">A confirmation email has been sent to your provided email address. Our admissions team will contact you within 2–3 business days.</p>
-    <button class="btn-primary" style="background: linear-gradient(135deg, var(--blue), var(--sky)); color: white; border: none; margin: 0 auto;" onclick="closeSuccess()">
-      Done ✓
-    </button>
-  </div>
-</div>
+    <!-- IPTV Section -->
+    <section class="iptv-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>IPTV - More Than Just Internet</h2>
+                <p style="color: rgba(255,255,255,0.9);">Transform your viewing experience with our advanced IPTV service</p>
+            </div>
 
-<script>
-  // Section navigation
-  function showSection(section) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(section).classList.add('active');
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    const navEl = document.getElementById('nav-' + section);
-    if (navEl) navEl.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Close mobile menu
-    document.getElementById('navLinks').classList.remove('open');
-    return false;
-  }
+            <div class="iptv-grid">
+                <div class="iptv-card">
+                    <i class="fas fa-tv"></i>
+                    <h3>185+ Channels</h3>
+                    <p>Wide variety of local and international channels</p>
+                </div>
+                <div class="iptv-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <h3>Wireless Ready</h3>
+                    <p>Seamless integration with your internet</p>
+                </div>
+                <div class="iptv-card">
+                    <i class="fab fa-youtube"></i>
+                    <h3>YouTube Integration</h3>
+                    <p>Stream YouTube directly on your TV</p>
+                </div>
+                <div class="iptv-card">
+                    <i class="fas fa-pause-circle"></i>
+                    <h3>Pause & Play</h3>
+                    <p>Never miss a moment - pause live TV</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  // Scrolled nav
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-  });
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Internet Packages</h2>
+                <p>Choose the perfect plan for your needs</p>
+            </div>
 
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Basic</h3>
+                        <div class="price">रू 1,075<span>/mo</span></div>
+                        <div class="speed">100 Mbps</div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 Month: रू 1,075</li>
+                            <li><i class="fas fa-check"></i> 3 Months: रू 2,800</li>
+                            <li><i class="fas fa-check"></i> 1 Year: रू 10,735</li>
+                            <li><i class="fas fa-check"></i> Standard Support</li>
+                        </ul>
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
 
-  // File upload label
-  function updateFileLabel(input) {
-    const files = input.files;
-    if (files.length > 0) {
-      document.getElementById('fileIcon').textContent = '✅';
-      document.getElementById('fileText').innerHTML = `<strong>${files.length} file(s) selected</strong>`;
-      let names = Array.from(files).map(f => f.name).join(', ');
-      document.querySelector('.file-hint').textContent = names;
-    }
-  }
+                <!-- Bronze Plan - Featured -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Bronze</h3>
+                        <div class="price">रू 1,200<span>/mo</span></div>
+                        <div class="speed">150 Mbps</div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 Month: रू 1,200</li>
+                            <li><i class="fas fa-check"></i> 3 Months: रू 3,200</li>
+                            <li><i class="fas fa-check"></i> 1 Year: रू 12,050</li>
+                            <li><i class="fas fa-check"></i> Priority Support</li>
+                        </ul>
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
 
-  // Form submission (simulated backend)
-  function submitForm(e) {
-    e.preventDefault();
-    const form = document.getElementById('admissionForm');
-    const btn = form.querySelector('.form-submit');
+                <!-- Silver Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Silver</h3>
+                        <div class="price">रू 1,470<span>/mo</span></div>
+                        <div class="speed">250 Mbps</div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 Month: रू 1,470</li>
+                            <li><i class="fas fa-check"></i> 3 Months: रू 4,200</li>
+                            <li><i class="fas fa-check"></i> 1 Year: रू 13,560</li>
+                            <li><i class="fas fa-check"></i> 5Ghz Router</li>
+                        </ul>
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
 
-    // Animate button
-    btn.textContent = 'Submitting...';
-    btn.disabled = true;
-    btn.style.opacity = '0.8';
+                <!-- Gold Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Gold</h3>
+                        <div class="price">रू 1,680<span>/mo</span></div>
+                        <div class="speed">350 Mbps</div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 Month: रू 1,680</li>
+                            <li><i class="fas fa-check"></i> 3 Months: रू 4,600</li>
+                            <li><i class="fas fa-check"></i> 1 Year: रू 17,400</li>
+                            <li><i class="fas fa-check"></i> IPTV Included</li>
+                        </ul>
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Simulate API call
-    setTimeout(() => {
-      const refNum = 'NGA-2026-' + Math.floor(1000 + Math.random() * 9000);
-      document.getElementById('successRef').textContent = 'Application Reference: ' + refNum;
-      document.getElementById('successOverlay').classList.add('show');
-      form.reset();
-      document.getElementById('fileIcon').textContent = '📁';
-      document.getElementById('fileText').innerHTML = '<strong>Click to upload</strong> or drag and drop';
-      document.querySelector('.file-hint').textContent = 'Birth certificate, report cards, transfer certificate, ID (PDF, JPG, PNG · Max 10MB each)';
-      btn.innerHTML = '<span>🎓</span> Submit Application';
-      btn.disabled = false;
-      btn.style.opacity = '1';
-    }, 1800);
-  }
+    <!-- Business Plans -->
+    <section class="pricing" style="background: var(--white); padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Business Solutions</h2>
+                <p>Dedicated connectivity for your enterprise</p>
+            </div>
 
-  function closeSuccess(event) {
-    if (!event || event.target === document.getElementById('successOverlay')) {
-      document.getElementById('successOverlay').classList.remove('show');
-    }
-  }
+            <div class="pricing-grid">
+                <!-- Diamond Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Diamond</h3>
+                        <div class="price">रू 2,074<span>/mo</span></div>
+                        <div class="speed">500 Mbps</div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 Month: रू 2,074</li>
+                            <li><i class="fas fa-check"></i> 3 Months: रू 5,360</li>
+                            <li><i class="fas fa-check"></i> 1 Year: रू 20,100</li>
+                            <li><i class="fas fa-check"></i> Static IP</li>
+                        </ul>
+                        <button class="pricing-btn">Contact Sales</button>
+                    </div>
+                </div>
 
-  // Drag and drop on file upload
-  const fileUpload = document.querySelector('.file-upload');
-  if (fileUpload) {
-    fileUpload.addEventListener('dragover', e => { e.preventDefault(); fileUpload.style.borderColor = 'var(--sky)'; });
-    fileUpload.addEventListener('dragleave', () => { fileUpload.style.borderColor = ''; });
-    fileUpload.addEventListener('drop', e => {
-      e.preventDefault();
-      fileUpload.style.borderColor = '';
-      const dt = e.dataTransfer;
-      document.getElementById('docUpload').files = dt.files;
-      updateFileLabel(document.getElementById('docUpload'));
-    });
-  }
+                <!-- Corporate Plan -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Recommended</div>
+                    <div class="pricing-header">
+                        <h3>Corporate</h3>
+                        <div class="price">रू 3,100<span>/mo</span></div>
+                        <div class="speed">SME</div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 Month: रू 3,100</li>
+                            <li><i class="fas fa-check"></i> 3 Months: रू 9,100</li>
+                            <li><i class="fas fa-check"></i> 1 Year: रू 31,000</li>
+                            <li><i class="fas fa-check"></i> SLA Guaranteed</li>
+                        </ul>
+                        <button class="pricing-btn">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  // Animate feature cards on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+    <!-- Coverage Area -->
+    <section class="coverage">
+        <div class="container">
+            <div class="coverage-content">
+                <div>
+                    <h2>Service Coverage Area</h2>
+                    <p>We're proud to serve the following areas in Dhankuta district with our high-speed fiber optic network:</p>
+                    
+                    <ul class="coverage-list">
+                        <li><i class="fas fa-check-circle"></i> Sangurigadhi</li>
+                        <li><i class="fas fa-check-circle"></i> Chaubise</li>
+                        <li><i class="fas fa-check-circle"></i> Dhankuta Municipality</li>
+                        <li><i class="fas fa-check-circle"></i> Hile</li>
+                        <li><i class="fas fa-check-circle"></i> Chhathar Jorpati</li>
+                        <li><i class="fas fa-check-circle"></i> Shahidbhumi</li>
+                        <li><i class="fas fa-check-circle"></i> Hatuwagadhi</li>
+                        <li><i class="fas fa-check-circle"></i> Dharan</li>
+                    </ul>
 
-  document.querySelectorAll('.feature-card, .program-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(24px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s';
-    observer.observe(card);
-  });
-</script>
+                    <p style="margin-top: 2rem;"><strong>95% coverage</strong> with Optical Fiber connectivity. From urban markets to rural villages, we bring high-speed internet to your doorstep.</p>
+                </div>
+                <div class="coverage-map">
+                    <i class="fas fa-map-marked-alt" style="font-size: 5rem; color: var(--primary-light);"></i>
+                    <p style="margin-top: 1rem;">Interactive map coming soon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Quick Links -->
+                <div class="footer-widget">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Packages</a></li>
+                        <li><a href="#">IPTV Services</a></li>
+                        <li><a href="#">Coverage Area</a></li>
+                        <li><a href="#">Customer Agreement</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-widget">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> Dharan: 9802309920</li>
+                        <li><i class="fas fa-phone"></i> Dhankuta: 9802777319</li>
+                        <li><i class="fas fa-phone"></i> Shahidbhumi: 9802330906</li>
+                        <li><i class="fas fa-envelope"></i> info@mountlink.net.np</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Customer Support</li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div class="footer-widget">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Customer Login</a></li>
+                        <li><a href="#">Pay Online</a></li>
+                        <li><a href="#">Service Status</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div class="footer-widget">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem;">Payment Partners</h3>
+                    <div class="payment-partners">
+                        <img src="https://mountlink.net.np/wp-content/uploads/2025/08/newLogo.ed7f73c800e12259be50.png" alt="Payment Partner 1">
+                        <img src="https://mountlink.net.np/wp-content/uploads/2025/08/images.png" alt="Payment Partner 2">
+                        <img src="https://mountlink.net.np/wp-content/uploads/2025/08/unnamed.png" alt="Payment Partner 3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Mountlink Telecommunication Pvt. Ltd. All rights reserved. | Powered by Mountlink Telecommunication</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
