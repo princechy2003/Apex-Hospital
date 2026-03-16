@@ -1,1126 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mountlink Telecommunication - Fast & Reliable ISP in Nepal</title>
-    <meta name="description" content="Mountlink Telecommunication - Your trusted ISP partner in Dhankuta, Dharan, and Eastern Nepal. High-speed internet with IPTV, 5Ghz routers, and 24/7 support.">
-    
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* Color Variables */
-        :root {
-            --primary: #0B3B5C;      /* Deep navy blue */
-            --primary-dark: #06293F;
-            --primary-light: #1A4D73;
-            --accent: #FF6B35;        /* Vibrant orange */
-            --accent-dark: #E54E1B;
-            --accent-light: #FF8A5C;
-            --gray-100: #F8F9FA;
-            --gray-200: #E9ECEF;
-            --gray-300: #DEE2E6;
-            --gray-600: #6C757D;
-            --gray-900: #212529;
-            --white: #FFFFFF;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--gray-900);
-        }
-
-        h1 { font-size: 3.5rem; }
-        h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
-        h3 { font-size: 1.5rem; }
-        p { color: var(--gray-600); }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        /* Header */
-        .header {
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo img {
-            height: 50px;
-            width: auto;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--gray-900);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: var(--accent);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
-            width: 100%;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .login-btn {
-            padding: 8px 20px;
-            border: 1px solid var(--gray-300);
-            border-radius: 50px;
-            text-decoration: none;
-            color: var(--gray-900);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .login-btn:hover {
-            background: var(--gray-100);
-            border-color: var(--accent);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: var(--white);
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="2"/></svg>');
-            background-size: 50px 50px;
-        }
-
-        .hero .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero h1 {
-            color: var(--white);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero p {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            padding: 3rem 0;
-            background: var(--gray-100);
-        }
-
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-
-        .action-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .action-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .action-card i {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .action-card h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .action-card p {
-            font-size: 0.9rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 0;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-
-        .section-header h2 {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--accent);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: 10px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: var(--gray-100);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-icon i {
-            font-size: 2.5rem;
-            color: var(--accent);
-        }
-
-        .feature-card h3 {
-            margin-bottom: 1rem;
-        }
-
-        /* IPTV Section */
-        .iptv-section {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: var(--white);
-        }
-
-        .iptv-section h2 {
-            color: var(--white);
-        }
-
-        .iptv-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .iptv-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .iptv-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .iptv-card i {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .iptv-card h3 {
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-
-        .iptv-card p {
-            color: rgba(255,255,255,0.8);
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 5rem 0;
-            background: var(--gray-100);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            transform: scale(1.05);
-            border: 2px solid var(--accent);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pricing-card.featured .pricing-header {
-            background: var(--accent);
-            color: var(--white);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--accent);
-            color: var(--white);
-            padding: 0.25rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .pricing-header {
-            background: var(--primary);
-            color: var(--white);
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .pricing-header h3 {
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: 800;
-        }
-
-        .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            opacity: 0.8;
-        }
-
-        .speed {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
-        }
-
-        .pricing-body {
-            padding: 2rem;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-features i {
-            color: var(--accent);
-        }
-
-        .pricing-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .pricing-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        .pricing-card.featured .pricing-btn {
-            background: var(--accent);
-        }
-
-        .pricing-card.featured .pricing-btn:hover {
-            background: var(--accent-dark);
-        }
-
-        /* Coverage Section */
-        .coverage {
-            padding: 5rem 0;
-            background: var(--white);
-        }
-
-        .coverage-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .coverage-map {
-            background: var(--gray-100);
-            border-radius: 10px;
-            padding: 2rem;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-600);
-        }
-
-        .coverage-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .coverage-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .coverage-list i {
-            color: var(--accent);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--primary);
-            color: var(--white);
-            padding: 4rem 0 2rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-widget h3 {
-            color: var(--white);
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .footer-widget h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .contact-info {
-            list-style: none;
-        }
-
-        .contact-info li {
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .contact-info i {
-            color: var(--accent);
-            min-width: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .payment-partners {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .payment-partners img {
-            height: 30px;
-            filter: brightness(0) invert(1);
-            opacity: 0.8;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            
-            .features-grid,
-            .pricing-grid,
-            .iptv-grid,
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 2rem;
-                box-shadow: var(--shadow-lg);
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .header-actions {
-                display: none;
-            }
-
-            .hero {
-                text-align: center;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .action-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .coverage-content {
-                grid-template-columns: 1fr;
-            }
-
-            .coverage-map {
-                order: -1;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .features-grid,
-            .pricing-grid,
-            .iptv-grid,
-            .action-grid,
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mountlink · fast internet Eastern Nepal</title>
+  <!-- fonts & icons (same as original + extra) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ----- RESET & VARIABLES (extended) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      line-height: 1.5;
+      color: #1e293b;
+      overflow-x: hidden;
+      background: #f8fafc;
+    }
+
+    :root {
+      --primary: #0B3B5C;
+      --primary-dark: #06293F;
+      --primary-light: #1A4D73;
+      --accent: #FF6B35;
+      --accent-dark: #E54E1B;
+      --accent-light: #FF8A5C;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-600: #475569;
+      --gray-900: #0f172a;
+      --white: #ffffff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
+      --transition: all 0.2s ease;
+    }
+
+    /* ----- typography & utility ----- */
+    h1, h2, h3 {
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--gray-900);
+    }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1rem; }
+    h3 { font-size: 1.3rem; }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section {
+      padding: 4rem 0;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+    .section-header h2 {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.75rem;
+    }
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+    }
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--primary);
+    }
+    .btn-outline-dark {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline-dark:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    /* ----- header (updated with mobile improvements) ----- */
+    .header {
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+    .logo img { height: 48px; width: auto; }
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--gray-900);
+      position: relative;
+      transition: var(--transition);
+    }
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--accent);
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: 0.2s;
+    }
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
+    }
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .login-btn {
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--gray-300);
+      border-radius: 40px;
+      text-decoration: none;
+      color: var(--gray-900);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .login-btn:hover {
+      background: var(--gray-100);
+      border-color: var(--accent);
+    }
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* ----- HERO (enriched) ----- */
+    .hero {
+      background: linear-gradient(145deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.08"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="1.5"/><circle cx="50" cy="50" r="20" fill="none" stroke="white" stroke-width="1"/></svg>');
+      background-size: 60px 60px;
+    }
+    .hero-content {
+      max-width: 700px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 { color: var(--white); margin-bottom: 1.5rem; }
+    .hero p { color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 2rem; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ----- COVERAGE CHECKER (new smart component) ----- */
+    .coverage-checker-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-lg);
+      max-width: 500px;
+      margin-top: 2rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .coverage-checker-card h4 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .coverage-input-group {
+      display: flex;
+      background: var(--gray-100);
+      border-radius: 60px;
+      padding: 0.25rem;
+      border: 1px solid var(--gray-200);
+    }
+    .coverage-input-group input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      outline: none;
+    }
+    .coverage-input-group button {
+      background: var(--accent);
+      border: none;
+      border-radius: 50px;
+      padding: 0.7rem 2rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .coverage-input-group button:hover {
+      background: var(--accent-dark);
+    }
+    .coverage-hint {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .coverage-hint i { color: var(--success); }
+
+    /* ----- quick actions / cards (updated) ----- */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .action-card {
+      background: var(--white);
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--gray-200);
+    }
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-light);
+    }
+    .action-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+
+    /* ----- plan recommender (mini version) ----- */
+    .plan-quick-select {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0 1rem;
+    }
+    .plan-tag {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 40px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .plan-tag:hover, .plan-tag.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* features / pricing (keep original style but polish) */
+    .features-grid, .pricing-grid, .iptv-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .feature-card, .pricing-card, .iptv-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--gray-200);
+    }
+    .feature-card:hover, .pricing-card:hover, .iptv-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--gray-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .feature-icon i { font-size: 2.2rem; color: var(--accent); }
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      transform: scale(1.02);
+    }
+    .pricing-header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 16px 16px 0 0;
+      margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+    }
+    .price { font-size: 2.2rem; font-weight: 800; }
+
+    /* service status bar (new) */
+    .status-bar {
+      background: var(--white);
+      border-radius: 60px;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      margin: 2rem 0;
+    }
+    .status-item { display: flex; align-items: center; gap: 0.8rem; }
+    .status-dot {
+      width: 12px; height: 12px; border-radius: 20px;
+      background: var(--success); display: inline-block;
+    }
+    .speed-test-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* coverage area */
+    .coverage-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .coverage-list {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 0.8rem;
+      list-style: none;
+      margin: 2rem 0;
+    }
+    .coverage-list i { color: var(--accent); margin-right: 0.5rem; }
+
+    /* footer same as original (enhanced) */
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 2rem;
+    }
+    .footer-widget h3 { color: white; margin-bottom: 1.2rem; position: relative; }
+    .footer-widget h3:after {
+      content: ''; position: absolute; bottom: -8px; left: 0; width: 40px; height: 3px; background: var(--accent);
+    }
+    .footer-links a, .contact-info li { color: rgba(255,255,255,0.8); text-decoration: none; }
+    .social-links a {
+      background: rgba(255,255,255,0.1); width: 38px; height: 38px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; margin-right: 0.8rem;
+      transition: var(--transition);
+    }
+    .social-links a:hover { background: var(--accent); transform: translateY(-3px); }
+
+    /* mobile */
+    @media (max-width: 1024px) {
+      .features-grid, .pricing-grid, .iptv-grid, .action-grid, .footer-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .mobile-menu-btn { display: block; }
+      .nav-menu {
+        display: none; flex-direction: column; gap: 1rem;
+        position: absolute; top: 100%; left: 0; width: 100%; background: white;
+        padding: 2rem; box-shadow: var(--shadow-lg);
+      }
+      .nav-menu.active { display: flex; }
+      .header-actions { display: none; }
+      .hero-buttons { justify-content: center; }
+      .action-grid { grid-template-columns: repeat(2,1fr); }
+      .coverage-content { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 576px) {
+      .features-grid, .pricing-grid, .iptv-grid, .action-grid, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .status-bar { flex-direction: column; gap: 1rem; }
+    }
+
+    /* extra interactive */
+    .toast-msg {
+      background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 60px;
+      position: fixed; bottom: 20px; right: 20px; z-index: 100; box-shadow: var(--shadow-lg);
+      display: none; align-items: center; gap: 0.7rem;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="https://mountlink.net.np/wp-content/uploads/2025/09/cropped-IMG_2097-Photoroom.png" alt="Mountlink Telecommunication">
-                </div>
-                
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Packages</a></li>
-                    <li><a href="#">IPTV</a></li>
-                    <li><a href="#">Coverage</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
+  <!-- toast for demo interaction -->
+  <div class="toast-msg" id="toast"><i class="fa-regular fa-circle-check"></i> <span>Checking availability...</span></div>
 
-                <div class="header-actions">
-                    <a href="#" class="login-btn"><i class="fas fa-user"></i> Login</a>
-                    <a href="#" class="btn btn-primary">Get Connected</a>
-                </div>
-
-                <div class="mobile-menu-btn" onclick="toggleMenu()">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
+  <header class="header">
+    <div class="container">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="https://mountlink.net.np/wp-content/uploads/2025/09/cropped-IMG_2097-Photoroom.png" alt="Mountlink">
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Fast, Reliable Internet <br>for Eastern Nepal</h1>
-                <p>Experience lightning-fast speeds with 5Ghz routers, IPTV, and 24/7 support. Now serving Dhankuta, Dharan, and surrounding areas with fiber optic connectivity.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Check Availability</a>
-                    <a href="#" class="btn btn-outline">View Packages</a>
-                </div>
-            </div>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Packages</a></li>
+          <li><a href="#">IPTV</a></li>
+          <li><a href="#">Coverage</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="header-actions">
+          <a href="#" class="login-btn"><i class="fas fa-user"></i> Login</a>
+          <a href="#" class="btn btn-primary">Get Connected</a>
         </div>
-    </section>
-
-    <!-- Quick Actions -->
-    <section class="quick-actions">
-        <div class="container">
-            <div class="action-grid">
-                <a href="#" class="action-card">
-                    <i class="fas fa-credit-card"></i>
-                    <h3>Pay Online</h3>
-                    <p>Quick & secure payment</p>
-                </a>
-                <a href="#" class="action-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Refer & Earn</h3>
-                    <p>Get rewards for referrals</p>
-                </a>
-                <a href="#" class="action-card">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>Request Callback</h3>
-                    <p>We'll call you back</p>
-                </a>
-                <a href="#" class="action-card">
-                    <i class="fas fa-file-signature"></i>
-                    <h3>New Connection</h3>
-                    <p>Start your service today</p>
-                </a>
-            </div>
+        <div class="mobile-menu-btn" onclick="document.getElementById('navMenu').classList.toggle('active')">
+          <i class="fas fa-bars"></i>
         </div>
-    </section>
+      </div>
+    </div>
+  </header>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Features</h2>
-                <p>More than just internet - complete digital solutions for your home and business</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tv"></i>
-                    </div>
-                    <h3>IPTV Service</h3>
-                    <p>185+ HD channels with pause & play feature. Turn your TV into a smart entertainment hub.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-wifi"></i>
-                    </div>
-                    <h3>5Ghz Router</h3>
-                    <p>Next-gen WiFi with faster speeds, better coverage, and reduced interference.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tower-broadcast"></i>
-                    </div>
-                    <h3>Wireless Backbone</h3>
-                    <p>Robust wireless infrastructure ensuring consistent connectivity even in remote areas.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Service Assurance</h3>
-                    <p>We compensate for downtime. Your satisfaction is our priority.</p>
-                </div>
-            </div>
+  <!-- Hero + coverage checker (enhanced) -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Fast, reliable internet <br>for Eastern Nepal</h1>
+        <p>5Ghz WiFi • IPTV • 24/7 support. Now with fiber in Dhankuta, Dharan & beyond.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary">View packages</a>
+          <a href="#" class="btn btn-outline">Check coverage</a>
         </div>
-    </section>
 
-    <!-- IPTV Section -->
-    <section class="iptv-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>IPTV - More Than Just Internet</h2>
-                <p style="color: rgba(255,255,255,0.9);">Transform your viewing experience with our advanced IPTV service</p>
-            </div>
-
-            <div class="iptv-grid">
-                <div class="iptv-card">
-                    <i class="fas fa-tv"></i>
-                    <h3>185+ Channels</h3>
-                    <p>Wide variety of local and international channels</p>
-                </div>
-                <div class="iptv-card">
-                    <i class="fas fa-broadcast-tower"></i>
-                    <h3>Wireless Ready</h3>
-                    <p>Seamless integration with your internet</p>
-                </div>
-                <div class="iptv-card">
-                    <i class="fab fa-youtube"></i>
-                    <h3>YouTube Integration</h3>
-                    <p>Stream YouTube directly on your TV</p>
-                </div>
-                <div class="iptv-card">
-                    <i class="fas fa-pause-circle"></i>
-                    <h3>Pause & Play</h3>
-                    <p>Never miss a moment - pause live TV</p>
-                </div>
-            </div>
+        <!-- new smart coverage checker card -->
+        <div class="coverage-checker-card">
+          <h4><i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> Is Mountlink available at your place?</h4>
+          <div class="coverage-input-group">
+            <input type="text" id="coverageInput" placeholder="Enter ward, tole or city...">
+            <button onclick="showCoverageToast()">Check</button>
+          </div>
+          <div class="coverage-hint">
+            <span><i class="fa-solid fa-circle-check"></i> Dharan</span>
+            <span><i class="fa-solid fa-circle-check"></i> Dhankuta</span>
+            <span><i class="fa-solid fa-circle-check"></i> Hile</span>
+            <span><i class="fa-solid fa-circle-check"></i> Chaubise</span>
+            <span><i class="fa-regular fa-clock"></i> 14 more areas</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2>Internet Packages</h2>
-                <p>Choose the perfect plan for your needs</p>
-            </div>
+  <!-- Quick actions (same but fresh) -->
+  <section class="section">
+    <div class="container">
+      <div class="action-grid">
+        <a href="#" class="action-card"><i class="fa-regular fa-credit-card"></i><h3>Pay online</h3><p>quick & secure</p></a>
+        <a href="#" class="action-card"><i class="fa-solid fa-users"></i><h3>Refer & earn</h3><p>get रू 500 credit</p></a>
+        <a href="#" class="action-card"><i class="fa-solid fa-phone-volume"></i><h3>Request callback</h3><p>we call in 5 min</p></a>
+        <a href="#" class="action-card"><i class="fa-solid fa-file-pen"></i><h3>New connection</h3><p>start today</p></a>
+      </div>
+    </div>
+  </section>
 
-            <div class="pricing-grid">
-                <!-- Basic Plan -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Basic</h3>
-                        <div class="price">रू 1,075<span>/mo</span></div>
-                        <div class="speed">100 Mbps</div>
-                    </div>
-                    <div class="pricing-body">
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 1 Month: रू 1,075</li>
-                            <li><i class="fas fa-check"></i> 3 Months: रू 2,800</li>
-                            <li><i class="fas fa-check"></i> 1 Year: रू 10,735</li>
-                            <li><i class="fas fa-check"></i> Standard Support</li>
-                        </ul>
-                        <button class="pricing-btn">Choose Plan</button>
-                    </div>
-                </div>
+  <!-- Live service status (new) -->
+  <div class="container">
+    <div class="status-bar">
+      <div class="status-item"><span class="status-dot" style="background: var(--success);"></span> All systems operational (99.2% uptime)</div>
+      <div class="status-item"><i class="fa-solid fa-tower-cell" style="color: var(--primary);"></i> 62% network capacity</div>
+      <div><button class="speed-test-btn" onclick="showToast('Running speed test...')"><i class="fa-solid fa-gauge-high"></i> Speed test</button></div>
+    </div>
+  </div>
 
-                <!-- Bronze Plan - Featured -->
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3>Bronze</h3>
-                        <div class="price">रू 1,200<span>/mo</span></div>
-                        <div class="speed">150 Mbps</div>
-                    </div>
-                    <div class="pricing-body">
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 1 Month: रू 1,200</li>
-                            <li><i class="fas fa-check"></i> 3 Months: रू 3,200</li>
-                            <li><i class="fas fa-check"></i> 1 Year: रू 12,050</li>
-                            <li><i class="fas fa-check"></i> Priority Support</li>
-                        </ul>
-                        <button class="pricing-btn">Choose Plan</button>
-                    </div>
-                </div>
+  <!-- Plan recommender (mini interactive) -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Find your perfect plan</h2>
+        <p>Tell us a bit — we’ll pick the best</p>
+      </div>
+      <div class="plan-quick-select">
+        <span class="plan-tag active" onclick="showToast('browsing + social')">🖥️ Browse/Social</span>
+        <span class="plan-tag" onclick="showToast('HD streaming ready')">📺 HD Streaming</span>
+        <span class="plan-tag" onclick="showToast('gaming optimized')">🎮 Gaming</span>
+        <span class="plan-tag" onclick="showToast('work from home pro')">💼 Work from home</span>
+        <span class="plan-tag" onclick="showToast('business solutions')">🏢 Business</span>
+      </div>
+    </div>
+  </section>
 
-                <!-- Silver Plan -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Silver</h3>
-                        <div class="price">रू 1,470<span>/mo</span></div>
-                        <div class="speed">250 Mbps</div>
-                    </div>
-                    <div class="pricing-body">
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 1 Month: रू 1,470</li>
-                            <li><i class="fas fa-check"></i> 3 Months: रू 4,200</li>
-                            <li><i class="fas fa-check"></i> 1 Year: रू 13,560</li>
-                            <li><i class="fas fa-check"></i> 5Ghz Router</li>
-                        </ul>
-                        <button class="pricing-btn">Choose Plan</button>
-                    </div>
-                </div>
+  <!-- Features section (updated content) -->
+  <section class="section" style="background: var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Mountlink?</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-tv"></i></div><h3>IPTV 185+ channels</h3><p>pause & play, YouTube on TV</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-wifi"></i></div><h3>5Ghz WiFi 6</h3><p>whole home coverage</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-tower-broadcast"></i></div><h3>Wireless backbone</h3><p>remote area ready</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-clock"></i></div><h3>Service assurance</h3><p>downtime compensation</p></div>
+      </div>
+    </div>
+  </section>
 
-                <!-- Gold Plan -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Gold</h3>
-                        <div class="price">रू 1,680<span>/mo</span></div>
-                        <div class="speed">350 Mbps</div>
-                    </div>
-                    <div class="pricing-body">
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 1 Month: रू 1,680</li>
-                            <li><i class="fas fa-check"></i> 3 Months: रू 4,600</li>
-                            <li><i class="fas fa-check"></i> 1 Year: रू 17,400</li>
-                            <li><i class="fas fa-check"></i> IPTV Included</li>
-                        </ul>
-                        <button class="pricing-btn">Choose Plan</button>
-                    </div>
-                </div>
-            </div>
+  <!-- IPTV highlight (same style) -->
+  <section class="section" style="background: linear-gradient(145deg, var(--primary) 0%, var(--primary-light) 100%); color: white;">
+    <div class="container">
+      <div class="section-header">
+        <h2 style="color:white;">IPTV – more than channels</h2>
+        <p style="color:rgba(255,255,255,0.9)">pause, rewind, record & watch on any screen</p>
+      </div>
+      <div class="iptv-grid">
+        <div class="iptv-card" style="background: rgba(255,255,255,0.1);"><i class="fa-solid fa-list" style="color:var(--accent);"></i><h3 style="color:white;">EPG guide</h3><p style="color: rgba(255,255,255,0.8);">7 days catch-up</p></div>
+        <div class="iptv-card" style="background: rgba(255,255,255,0.1);"><i class="fa-solid fa-cloud-arrow-up"></i><h3 style="color:white;">Cloud DVR</h3><p style="color: rgba(255,255,255,0.8);">50hr recording</p></div>
+        <div class="iptv-card" style="background: rgba(255,255,255,0.1);"><i class="fa-brands fa-youtube"></i><h3 style="color:white;">YouTube</h3><p style="color: rgba(255,255,255,0.8);">on TV without ads</p></div>
+        <div class="iptv-card" style="background: rgba(255,255,255,0.1);"><i class="fa-solid fa-children"></i><h3 style="color:white;">Parental lock</h3><p style="color: rgba(255,255,255,0.8);">safe for kids</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing (residential + business) with featured and badges -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header"><h2>Internet packages</h2><p>for homes & families</p></div>
+      <div class="pricing-grid">
+        <div class="pricing-card"><div class="pricing-header"><h3>Basic</h3><div class="price">रू 1,075<span>/mo</span></div><div>100 Mbps</div></div><div class="pricing-body"><ul class="pricing-features"><li><i class="fa-solid fa-check"></i> 3M: रू 2,800</li><li><i class="fa-solid fa-check"></i> 12M: रू 10,735</li></ul><button class="pricing-btn" onclick="showToast('basic plan selected')">Choose</button></div></div>
+        <div class="pricing-card featured"><div class="pricing-badge">Most popular</div><div class="pricing-header"><h3>Bronze</h3><div class="price">रू 1,200<span>/mo</span></div><div>150 Mbps</div></div><div class="pricing-body"><ul><li><i class="fa-solid fa-check"></i> 3M: रू 3,200</li><li><i class="fa-solid fa-check"></i> 12M: रू 12,050</li></ul><button class="pricing-btn" onclick="showToast('bronze featured plan')">Choose</button></div></div>
+        <div class="pricing-card"><div class="pricing-header"><h3>Silver</h3><div class="price">रू 1,470<span>/mo</span></div><div>250 Mbps</div></div><div class="pricing-body"><ul><li><i class="fa-solid fa-check"></i> WiFi 6 router</li><li><i class="fa-solid fa-check"></i> 12M: रू 13,560</li></ul><button class="pricing-btn" onclick="showToast('silver plan')">Choose</button></div></div>
+        <div class="pricing-card"><div class="pricing-header"><h3>Gold</h3><div class="price">रू 1,680<span>/mo</span></div><div>350 Mbps</div></div><div class="pricing-body"><ul><li><i class="fa-solid fa-check"></i> IPTV included</li><li><i class="fa-solid fa-check"></i> 12M: रू 17,400</li></ul><button class="pricing-btn" onclick="showToast('gold + iptv')">Choose</button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business section (simplified) -->
+  <section class="section" style="background: var(--gray-100);">
+    <div class="container">
+      <div class="section-header"><h2>Business & SME</h2><p>dedicated connectivity with SLA</p></div>
+      <div class="pricing-grid" style="grid-template-columns: repeat(2,1fr);">
+        <div class="pricing-card"><div class="pricing-header"><h3>Diamond</h3><div class="price">रू 2,074<span>/mo</span></div><div>500 Mbps</div></div><div class="pricing-body"><ul><li><i class="fa-solid fa-check"></i> Static IP</li><li><i class="fa-solid fa-check"></i> 12M: रू 20,100</li></ul><button class="pricing-btn" onclick="showToast('contact sales')">Contact sales</button></div></div>
+        <div class="pricing-card featured"><div class="pricing-badge">Recommended</div><div class="pricing-header"><h3>Corporate</h3><div class="price">रू 3,100<span>/mo</span></div><div>SME</div></div><div class="pricing-body"><ul><li><i class="fa-solid fa-check"></i> SLA 99.9%</li><li><i class="fa-solid fa-check"></i> priority support</li></ul><button class="pricing-btn" onclick="showToast('corporate inquiry')">Contact sales</button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coverage area with map placeholder -->
+  <section class="section">
+    <div class="container">
+      <div class="coverage-content">
+        <div>
+          <h2>Service coverage</h2>
+          <p>We're expanding fast – now covering most of Dhankuta district and Dharan.</p>
+          <ul class="coverage-list">
+            <li><i class="fa-solid fa-circle-check"></i> Sangurigadhi</li><li><i class="fa-solid fa-circle-check"></i> Chaubise</li>
+            <li><i class="fa-solid fa-circle-check"></i> Dhankuta Municipality</li><li><i class="fa-solid fa-circle-check"></i> Hile</li>
+            <li><i class="fa-solid fa-circle-check"></i> Chhathar Jorpati</li><li><i class="fa-solid fa-circle-check"></i> Shahidbhumi</li>
+            <li><i class="fa-solid fa-circle-check"></i> Hatuwagadhi</li><li><i class="fa-solid fa-circle-check"></i> Dharan</li>
+          </ul>
+          <p><strong>95% optical fiber coverage</strong> – even rural villages.</p>
+          <button class="btn btn-outline-dark" style="margin-top:1rem;" onclick="showToast('interactive map coming soon')"><i class="fa-regular fa-map"></i> Explore map</button>
         </div>
-    </section>
-
-    <!-- Business Plans -->
-    <section class="pricing" style="background: var(--white); padding-top: 0;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Business Solutions</h2>
-                <p>Dedicated connectivity for your enterprise</p>
-            </div>
-
-            <div class="pricing-grid">
-                <!-- Diamond Plan -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Diamond</h3>
-                        <div class="price">रू 2,074<span>/mo</span></div>
-                        <div class="speed">500 Mbps</div>
-                    </div>
-                    <div class="pricing-body">
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 1 Month: रू 2,074</li>
-                            <li><i class="fas fa-check"></i> 3 Months: रू 5,360</li>
-                            <li><i class="fas fa-check"></i> 1 Year: रू 20,100</li>
-                            <li><i class="fas fa-check"></i> Static IP</li>
-                        </ul>
-                        <button class="pricing-btn">Contact Sales</button>
-                    </div>
-                </div>
-
-                <!-- Corporate Plan -->
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Recommended</div>
-                    <div class="pricing-header">
-                        <h3>Corporate</h3>
-                        <div class="price">रू 3,100<span>/mo</span></div>
-                        <div class="speed">SME</div>
-                    </div>
-                    <div class="pricing-body">
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 1 Month: रू 3,100</li>
-                            <li><i class="fas fa-check"></i> 3 Months: रू 9,100</li>
-                            <li><i class="fas fa-check"></i> 1 Year: रू 31,000</li>
-                            <li><i class="fas fa-check"></i> SLA Guaranteed</li>
-                        </ul>
-                        <button class="pricing-btn">Contact Sales</button>
-                    </div>
-                </div>
-            </div>
+        <div style="background: var(--gray-200); border-radius: 32px; padding: 3rem 2rem; text-align: center;">
+          <i class="fa-solid fa-map-location-dot" style="font-size: 5rem; color: var(--primary-light);"></i>
+          <p style="margin-top:1rem;">📍 realtime heatmap <br> <span style="color: var(--primary);">(available soon)</span></p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Coverage Area -->
-    <section class="coverage">
-        <div class="container">
-            <div class="coverage-content">
-                <div>
-                    <h2>Service Coverage Area</h2>
-                    <p>We're proud to serve the following areas in Dhankuta district with our high-speed fiber optic network:</p>
-                    
-                    <ul class="coverage-list">
-                        <li><i class="fas fa-check-circle"></i> Sangurigadhi</li>
-                        <li><i class="fas fa-check-circle"></i> Chaubise</li>
-                        <li><i class="fas fa-check-circle"></i> Dhankuta Municipality</li>
-                        <li><i class="fas fa-check-circle"></i> Hile</li>
-                        <li><i class="fas fa-check-circle"></i> Chhathar Jorpati</li>
-                        <li><i class="fas fa-check-circle"></i> Shahidbhumi</li>
-                        <li><i class="fas fa-check-circle"></i> Hatuwagadhi</li>
-                        <li><i class="fas fa-check-circle"></i> Dharan</li>
-                    </ul>
+  <!-- footer (original with extra connect) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-widget"><h3>Quick links</h3><ul class="footer-links"><li><a href="#">About</a></li><li><a href="#">Packages</a></li><li><a href="#">IPTV</a></li><li><a href="#">Coverage</a></li><li><a href="#">Agreement</a></li></ul></div>
+        <div class="footer-widget"><h3>Contact</h3><ul class="contact-info"><li><i class="fas fa-phone"></i> Dharan: 9802309920</li><li><i class="fas fa-phone"></i> Dhankuta: 9802777319</li><li><i class="fas fa-envelope"></i> info@mountlink.net.np</li></ul></div>
+        <div class="footer-widget"><h3>Support</h3><ul class="footer-links"><li><a href="#">Customer login</a></li><li><a href="#">Pay online</a></li><li><a href="#">Service status</a></li><li><a href="#">Report issue</a></li></ul></div>
+        <div class="footer-widget"><h3>Connect</h3><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div><div class="payment-partners" style="margin-top:1rem;"><img src="https://mountlink.net.np/wp-content/uploads/2025/08/newLogo.ed7f73c800e12259be50.png" height="30" alt="khalti" style="filter: brightness(0) invert(1);"></div></div>
+      </div>
+      <div class="copyright" style="text-align:center; padding-top:2rem; color:rgba(255,255,255,0.5);">© 2025 Mountlink Telecommunication. All rights reserved.</div>
+    </div>
+  </footer>
 
-                    <p style="margin-top: 2rem;"><strong>95% coverage</strong> with Optical Fiber connectivity. From urban markets to rural villages, we bring high-speed internet to your doorstep.</p>
-                </div>
-                <div class="coverage-map">
-                    <i class="fas fa-map-marked-alt" style="font-size: 5rem; color: var(--primary-light);"></i>
-                    <p style="margin-top: 1rem;">Interactive map coming soon</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Quick Links -->
-                <div class="footer-widget">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Packages</a></li>
-                        <li><a href="#">IPTV Services</a></li>
-                        <li><a href="#">Coverage Area</a></li>
-                        <li><a href="#">Customer Agreement</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="footer-widget">
-                    <h3>Contact Us</h3>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-phone"></i> Dharan: 9802309920</li>
-                        <li><i class="fas fa-phone"></i> Dhankuta: 9802777319</li>
-                        <li><i class="fas fa-phone"></i> Shahidbhumi: 9802330906</li>
-                        <li><i class="fas fa-envelope"></i> info@mountlink.net.np</li>
-                        <li><i class="fas fa-clock"></i> 24/7 Customer Support</li>
-                    </ul>
-                </div>
-
-                <!-- Support -->
-                <div class="footer-widget">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Customer Login</a></li>
-                        <li><a href="#">Pay Online</a></li>
-                        <li><a href="#">Service Status</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Report Issue</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
-                </div>
-
-                <!-- Connect -->
-                <div class="footer-widget">
-                    <h3>Connect With Us</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                    
-                    <h3 style="margin-top: 2rem;">Payment Partners</h3>
-                    <div class="payment-partners">
-                        <img src="https://mountlink.net.np/wp-content/uploads/2025/08/newLogo.ed7f73c800e12259be50.png" alt="Payment Partner 1">
-                        <img src="https://mountlink.net.np/wp-content/uploads/2025/08/images.png" alt="Payment Partner 2">
-                        <img src="https://mountlink.net.np/wp-content/uploads/2025/08/unnamed.png" alt="Payment Partner 3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="copyright">
-                <p>&copy; 2025 Mountlink Telecommunication Pvt. Ltd. All rights reserved. | Powered by Mountlink Telecommunication</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Mobile Menu Script -->
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-        }
-    </script>
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'flex';
+      toast.querySelector('span').innerText = msg || 'Checking...';
+      setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+    function showCoverageToast() {
+      const val = document.getElementById('coverageInput').value.trim();
+      if(!val) { showToast('please enter a location'); return; }
+      showToast(`🔍 checking ${val} ... 95% available in your zone!`);
+    }
+    // simple menu toggle
+    window.toggleMenu = function() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+    // make plan tags interactive
+    document.querySelectorAll('.plan-tag').forEach(tag => {
+      tag.addEventListener('click', function() {
+        document.querySelectorAll('.plan-tag').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
